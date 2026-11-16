@@ -98,6 +98,15 @@ def inspect_evaluation(directory, scale, regime, tig_repo, *, source_root=None, 
     if not manifest:
         return result, []
     issues = result["issues"]
+    from .training_health import HealthGateError, admission_check
+    checkpoint_for_health = manifest.get("checkpoint")
+    if checkpoint_for_health:
+        try:
+            health = admission_check(Path(checkpoint_for_health).parent)
+            if health is not None:
+                result["training_health"] = health
+        except HealthGateError as exc:
+            issues.append(f"training health admission rejected: {exc}")
     if action_normalization == V2_ACTION_NORMALIZATION:
         for key, expected in V2_RECIPE.items():
             if manifest.get("training_metadata", {}).get(key) != expected:
@@ -215,6 +224,13 @@ def inspect_training(output, expected_regime, scale, *, verify_checkpoint=False,
     if not manifest:
         return result
     issues = result["issues"]
+    from .training_health import HealthGateError, admission_check, require_no_health_stop
+    try:
+        require_no_health_stop(output)
+    except HealthGateError as exc:
+        issues.append(f"training health stop: {exc}")
+        result.update(status="health_stopped")
+        return result
     expected_scale = None if expected_regime == "scratch" else scale
     expected = {"regime": expected_regime, "pretraining_scale": expected_scale, "pilot": False, "prompt_source": "human",
                 "world_size": 8, "global_batch": 64, "max_updates": BUDGETS[expected_regime], "fixed_vision_preprocessing": True, "seed": 1, "init_seed": 1}
@@ -255,6 +271,14 @@ def inspect_training(output, expected_regime, scale, *, verify_checkpoint=False,
     clean_exit = process.get("status") == "completed" and process.get("returncode", process.get("exit_code")) == 0
     if not completed or not clean_exit:
         result.update(status="running_or_incomplete", progress=read(output / "progress.json"), process=process)
+        return result
+    try:
+        health = admission_check(output)
+        if health is not None:
+            result["training_health"] = health
+    except HealthGateError as exc:
+        issues.append(f"training health admission rejected: {exc}")
+        result.update(status="health_stopped")
         return result
     final = output / "final.pt"
     if not final.is_file():

@@ -443,8 +443,26 @@ def validate_ready(data_path, feature_path, key, fingerprint=None):
     return feature["feature_fingerprint"]
 
 
+def training_health_contract(output, *, final=False):
+    """A separate operational gate; it never changes the model training recipe."""
+    from .training_health import HealthGateError, admission_check, require_no_health_stop
+    try:
+        require_no_health_stop(output)
+        evidence = admission_check(output) if final else None
+    except HealthGateError as exc:
+        atomic_json(Path(output) / "training_health_rejection.json", {
+            "schema": "training_health_rejection_v1", "observed_utc": now(),
+            "error": str(exc), "decision": exc.decision, "formal_admission_blocked": True})
+        raise ContractError(f"Training health admission rejected {output}: {exc}") from exc
+    if evidence is not None:
+        atomic_json(Path(output) / "training_health_admission.json", evidence)
+    return evidence
+
+
 def checkpoint_summary(path):
     """Only the internal inspection command imports Torch; tensors stay CPU/mmap."""
+    path = Path(path)
+    health = training_health_contract(path.parent, final=path.name == "final.pt")
     import torch
     value = torch.load(path, map_location="cpu", weights_only=False, mmap=True)
     metadata = value.get("metadata", {})
@@ -466,6 +484,9 @@ def checkpoint_summary(path):
     result["model_input_perturbation"] = model.get("input_pertub")
     result.update(checkpoint_ema_summary(value, metadata))
     result["normalizer_buffers_match_mode"] = checkpoint_normalizer_matches(value)
+    if health is not None:
+        result["training_health"] = health
+    training_health_contract(path.parent)
     return result
 
 
@@ -478,6 +499,7 @@ def inspect_checkpoint(config, path):
 
 def training_contract(config, step, artifacts, *, checkpoint_reader=None, allow_incomplete=False):
     output = Path(step.output)
+    training_health_contract(output)
     manifest = read_json(output / "training_manifest.json")
     process = read_json(output / "process_status.json", {})
     if not manifest:
@@ -548,6 +570,7 @@ def training_contract(config, step, artifacts, *, checkpoint_reader=None, allow_
             return {"status": "pending", "recovery_required": True}
         raise ContractError(f"Interrupted/pilot/incomplete training is not a completed stage: {output}")
     final = output / "final.pt"
+    training_health_contract(output, final=True)
     if checkpoint_reader is None:
         return {"status": "candidate_complete", "experiment_identity": manifest["experiment_identity"]}
     metadata = checkpoint_reader(final)
@@ -584,6 +607,8 @@ def evaluation_contract(config, step, *, checkpoint_hash=None):
     manifest = read_json(directory / "evaluation_manifest.json")
     if manifest is None:
         return {"status": "pending"}
+    if manifest.get("checkpoint"):
+        training_health_contract(Path(manifest["checkpoint"]).parent, final=True)
     experiment = manifest.get("experiment_identity")
     if identity({key: value for key, value in manifest.items() if key != "experiment_identity"}) != experiment:
         raise ContractError("Evaluation manifest identity changed")

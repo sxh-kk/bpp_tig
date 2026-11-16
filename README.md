@@ -25,7 +25,7 @@ All four groups have 200 completed, clean-exit rollouts with actual EMA inferenc
 
 Seen changes from 112/200 to 95/200: 43 previous successes fail and 26 previous failures succeed. Both C15 training logs have no recorded gradient norm above1; this regression is not the old C45 gradient pathology. Min/max, epsilon perturbation and raw-to-EMA evaluation changed together, so existing evidence does not isolate their causal contributions. The reward proxy remains distinct from paper-defined Sub-SR. See the [C15 comparison and C45 handling analysis (Chinese)](metrics/v2_c15/analysis_CN.md).
 
-EMA does not feed back into raw training gradients. Current code rejects nonfinite loss/gradients but has no automatic gate for sustained extreme finite gradients; the analysis recommends such a gate, without changing the running recipe or adding model experiments.
+EMA does not feed back into raw training gradients. A separate [training health gate](TRAINING_HEALTH.md) was deployed on 2026-11-16 at 16:04 Asia/Shanghai for C30/C45 and their fine-tuning stages. It reads existing logs, cooperatively stops sustained gradient anomalies and synchronously audits complete stage logs before admitting checkpoints. The in-flight training source, recipe and budget are unchanged; no additional model experiments or tests were run.
 
 ### Primary metric: terminal success rate (%) — archived v1
 

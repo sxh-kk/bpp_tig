@@ -1,0 +1,21 @@
+{
+  "schema": "training_health_policy_v1",
+  "scope": [
+    "c30",
+    "c30_finetune",
+    "c45",
+    "c45_finetune"
+  ],
+  "window_points": 10,
+  "min_window_span_updates": 1800,
+  "required_high_gradient_points": 8,
+  "rules": {
+    "sustained_extreme_gradient": {
+      "grad_norm_threshold": 100.0
+    },
+    "sustained_high_gradient_loss_stagnation": {
+      "grad_norm_threshold": 10.0,
+      "min_loss_median_ratio": 0.98
+    }
+  }
+}
