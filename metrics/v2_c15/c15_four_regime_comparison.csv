@@ -1,0 +1,5 @@
+regime,v1_successes,v1_terminal_sr,v2_successes,v2_terminal_sr,episodes_each,v2_valid
+seen,112,0.56,95,0.475,200,True
+zero_shot,2,0.01,6,0.03,200,True
+scratch,4,0.02,10,0.05,200,True
+pretrain_finetune,80,0.4,75,0.375,200,True

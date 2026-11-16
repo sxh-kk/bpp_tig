@@ -6,11 +6,26 @@
 
 ## 当前状态与指标
 
-**下表是已封存的 v1（`legacy_quantile`、DDIM clip1）结果，不是修正后的 v2 成绩。** 七份训练 checkpoint、十组独立评测已完成独立核验，共2,000个正式 rollout，包含 worker 正常退出与权重哈希检查。权威归档为2026-11-16的 v1 review.json (local run artifact: `results/review/all_scales_v1_clip1/review.json`)，完整精度见 [groups.csv](metrics/v1_clip1/groups.csv)。
+**标注为 v1 的表格是已封存的 v1（`legacy_quantile`、DDIM clip1）结果，不是修正后的 v2 成绩。** 七份训练 checkpoint、十组独立评测已完成独立核验，共2,000个正式 rollout，包含 worker 正常退出与权重哈希检查。权威归档为2026-11-16的 v1 review.json (local run artifact: `results/review/all_scales_v1_clip1/review.json`)，完整精度见 [groups.csv](metrics/v1_clip1/groups.csv)。
 
 v1 将动作按训练 q01/q99 归一化，但训练目标没有裁剪；推理沿用 `clip_sample=True`、range1 的 DDIM，最终归一化输出受限于 `[-1,1]`，因此不能输出超出相应训练分位数的原始关节目标。**训练目标与采样支持范围不配套已经确认。** 这与控制器的物理关节限幅是两个环节，控制器 clip_count 为0不能排除此问题。该问题对成功率、尤其 C45 下降的具体贡献尚未被因果隔离。
 
-已接受的 v2 配方包含三项修正：`train_minmax_joint14_gripper_identity_v2` 使14个关节目标使用**训练 min/max**、两维夹爪命令保持 identity；恢复源 input perturbation `0.1`；恢复源 EMA 更新。state18 的既有归一化与 DDIM clip1 保留。实现与重训前复核已完成，**v2 C15 正式训练进行中，2026-11-16 04:39 UTC（北京时间12:39）启动；尚无 v2 评测成绩**。不能给旧权重换一份统计量就标成 v2；新训练使用独立 checkpoint、manifest 和输出目录。
+已接受的 v2 配方包含三项修正：`train_minmax_joint14_gripper_identity_v2` 使14个关节目标使用**训练 min/max**、两维夹爪命令保持 identity；恢复源 input perturbation `0.1`；恢复源 EMA 更新。state18 的既有归一化与 DDIM clip1 保留。实现与重训前复核已完成，**截至北京时间2026-11-16 14:47，v2 C15 四口径已完成，C30 训练进行中，C45 尚未开始**。不能给旧权重换一份统计量就标成 v2；新训练使用独立 checkpoint、manifest 和输出目录。
+
+### 修正版 v2——C15 四口径已完成
+
+四组各200个正式回合，均通过case/manifest及worker正常退出核验，实际使用EMA推理，共800回合。C30/C45尚无新版成绩，不计算v2三档均值。
+
+| 口径 | 末态成功率 SR（%） | Once 成功率（%） | 开源代码 reward proxy |
+|---|---:|---:|---:|
+| Seen | 47.5 | 57.5 | 0.7716 |
+| Zero-shot | 3.0 | 3.0 | 0.1505 |
+| Scratch | 5.0 | 5.0 | 0.2412 |
+| P+FT | 37.5 | 38.0 | 0.6111 |
+
+Seen 从112/200变为95/200：43例旧成功变失败，26例旧失败变成功。两版C15训练日志均没有记录到梯度范数大于1，不能套用旧C45的梯度异常解释。min/max、输入扰动和raw→EMA评测权重同时变化，现有证据无法分别归因。reward proxy仍不等同论文Sub-SR。详见 [C15下降与C45处理分析](metrics/v2_c15/analysis_CN.md)。
+
+EMA不参与raw训练梯度反馈。当前代码只自动拒绝非有限loss/梯度，尚无持续极端有限梯度的自动拦截；本次只读分析建议补健康门槛，未修改在跑配方或增加模型实验。
 
 ### 主指标：末态成功率 SR（%）——v1 归档
 
@@ -213,7 +228,7 @@ TARGET_FEATURES="$BPP_ROOT/cache/bpp_frozen_cls/manifests/scratch-human-3ceb62b3
 
 Scratch 改用目标 manifest、`--regime scratch --max-updates 3000`，保持 v2 normalization 并使用独立输出目录。P+FT 用 `--regime finetune --pretraining-scale c15 --initialize-from "$V2_RUN_ROOT/training/c15/final.pt"`、目标 manifest 和3,000更新；C30/C45 分别使用对应 manifest 与90,000/135,000更新。每个 v2 Ck 及 Scratch 从共同外部 LIBERO 权重开始，P+FT/resume 必须保持相同 v2 mode。无新字段的历史 native checkpoint 仍按 `legacy_quantile` 可读，但不能作为 v2 初始化/恢复来源。
 
-v2 编排器使用独立 `results/pipeline/bpp_human_minmax_v2`，C15 保存于该根目录的 `training/c15`，然后依次完成 C15/C30/C45 四口径。复用 v1 的已准备输入证据，不复用其已训练权重或成绩。复核已通过且 C15 训练正在运行。第一条只生成计划，run/monitor 展示当前配置，其中 monitor 读取当前进度：
+v2 编排器使用独立 `results/pipeline/bpp_human_minmax_v2`，C15 保存于该根目录的 `training/c15`，然后依次完成 C15/C30/C45 四口径。复用 v1 的已准备输入证据，不复用其已训练权重或成绩。C15 四口径已完成并核验，C30 训练进行中。第一条只生成计划，run/monitor 展示当前配置，其中 monitor 读取当前进度：
 
 ```bash
 "$BPP_ROOT/envs/downloader/bin/python" "$BPP_BASELINE_DIR/run_bpp_imitator.py" plan \

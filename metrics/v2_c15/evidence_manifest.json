@@ -1,0 +1,26 @@
+{
+  "schema": "bpp_c15_seen_c45_readonly_artifact_v1",
+  "created_utc": "2026-11-16T06:50:53.231316+00:00",
+  "new_training_runs": 0,
+  "new_inference_runs": 0,
+  "new_rollouts": 0,
+  "new_tests": 0,
+  "source_audits": {
+    "c15_v1_v2_case_forensics.json": "5eb59dca7b6c4b2d862ce1550d95e8ab925aabb599047237c8ca70962be1ba0b",
+    "c15_v1_v2_recipe_review.json": "8c5e8e2f4f145ae8fcc48c6d60c4c50271eacedf920fa38a34fe657db4ab6a2d",
+    "c15_v1_v2_training_geometry.json": "485798f7a3e9da504f0aaa18f65e4a6122b4974804239b28410233e6aac14d53",
+    "c15_minmax_v2_four_regime_review.json": "23710bde2082882f0e0a7881d843134bb390c2186a4c1e4887d777473f60221d",
+    "bpp_c45_failure_analysis_v1.json": "c9c1823f33453fa958175320fd377cb0eaa47a1a6ab98f84ecb05960e87c1565",
+    "c45_stability_handling_review.json": "5d24a4f8339d0af95cdbd0e9215db0d2ded1f9669e9afbb994a61f28056365cc"
+  },
+  "outputs": {
+    "c15_v1_v2_diagnostics.svg": "cba80983e0e6eca9925905d242c8d95afe2ccc3de6b40beb95f3659784dbad23",
+    "c15_seen_task_comparison.csv": "a5c833ddcc08ca64758d43fd1ce55492631fbab8eec0dc2d4fb9ec071c0bd0e4",
+    "c15_four_regime_comparison.csv": "bba6e7975571f8172e2f52ba0f4ea8c09524b10a050fed12aebcb3ed88ebc563",
+    "audit_summary.json": "bc31352d452579da0aad865029348701a24124318f2acdde3ae04a335eb78a0c",
+    "c15_v1_v2_diagnostics.png": "31a6d9193b4ecb9cdd56d281f47bafcb44ae6e4f3d9744bc2b2dc8e89f2949b3",
+    "analysis_CN.md": "372cd0912f72f0eb95cd4d3f3ca305f65390cf0165c0d18355f42a71c05e1d88"
+  },
+  "summary_only": true,
+  "full_raw_audits_included": false
+}

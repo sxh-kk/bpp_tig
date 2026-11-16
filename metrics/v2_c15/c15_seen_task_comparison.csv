@@ -1,0 +1,6 @@
+task,v1_terminal_successes,v2_terminal_successes,v1_once_successes,v2_once_successes,episodes_each
+TwoRobotFoldTowel-v1,24,20,26,21,40
+TwoRobotPlaceFileFolder-v1,24,26,32,30,40
+TwoRobotPlaceMugRack-v1,20,13,27,18,40
+TwoRobotPlacePlateRack-v1,28,23,33,33,40
+TwoRobotStirSpoon-v1,16,13,16,13,40

@@ -1,0 +1,632 @@
+{
+  "schema": "bpp_v2_c15_public_audit_summary_v1",
+  "created_utc": "2026-11-16T06:54:55.399615+00:00",
+  "summary_only": true,
+  "full_raw_audits_included": false,
+  "new_model_experiments": 0,
+  "four_regimes_valid": true,
+  "verified_rollouts": 800,
+  "overall_seen": {
+    "v1": {
+      "episodes": 200,
+      "success_at_end": 112,
+      "success_at_end_rate": 0.56,
+      "success_once": 134,
+      "success_once_rate": 0.67,
+      "once_but_not_end": 22,
+      "end_given_once": 0.835820895522388,
+      "mean_last_normalized_reward_proxy": 0.8501853306824342
+    },
+    "v2": {
+      "episodes": 200,
+      "success_at_end": 95,
+      "success_at_end_rate": 0.475,
+      "success_once": 115,
+      "success_once_rate": 0.575,
+      "once_but_not_end": 20,
+      "end_given_once": 0.8260869565217391,
+      "mean_last_normalized_reward_proxy": 0.7715630089119077
+    },
+    "terminal_transition": {
+      "0->0": 62,
+      "0->1": 26,
+      "1->0": 43,
+      "1->1": 69
+    },
+    "once_transition": {
+      "0->0": 43,
+      "0->1": 23,
+      "1->0": 42,
+      "1->1": 92
+    }
+  },
+  "seen_by_task": {
+    "TwoRobotFoldTowel-v1": {
+      "v1": {
+        "episodes": 40,
+        "success_at_end": 24,
+        "success_at_end_rate": 0.6,
+        "success_once": 26,
+        "success_once_rate": 0.65,
+        "once_but_not_end": 2,
+        "end_given_once": 0.9230769230769231,
+        "mean_last_normalized_reward_proxy": 0.8901825845241547
+      },
+      "v2": {
+        "episodes": 40,
+        "success_at_end": 20,
+        "success_at_end_rate": 0.5,
+        "success_once": 21,
+        "success_once_rate": 0.525,
+        "once_but_not_end": 1,
+        "end_given_once": 0.9523809523809523,
+        "mean_last_normalized_reward_proxy": 0.7550192674621939
+      },
+      "terminal_transition": {
+        "0->0": 11,
+        "0->1": 5,
+        "1->0": 9,
+        "1->1": 15
+      },
+      "once_transition": {
+        "0->0": 8,
+        "0->1": 6,
+        "1->0": 11,
+        "1->1": 15
+      }
+    },
+    "TwoRobotPlaceFileFolder-v1": {
+      "v1": {
+        "episodes": 40,
+        "success_at_end": 24,
+        "success_at_end_rate": 0.6,
+        "success_once": 32,
+        "success_once_rate": 0.8,
+        "once_but_not_end": 8,
+        "end_given_once": 0.75,
+        "mean_last_normalized_reward_proxy": 0.8531488701701164
+      },
+      "v2": {
+        "episodes": 40,
+        "success_at_end": 26,
+        "success_at_end_rate": 0.65,
+        "success_once": 30,
+        "success_once_rate": 0.75,
+        "once_but_not_end": 4,
+        "end_given_once": 0.8666666666666667,
+        "mean_last_normalized_reward_proxy": 0.8631870795041323
+      },
+      "terminal_transition": {
+        "0->0": 6,
+        "0->1": 10,
+        "1->0": 8,
+        "1->1": 16
+      },
+      "once_transition": {
+        "0->0": 2,
+        "0->1": 6,
+        "1->0": 8,
+        "1->1": 24
+      }
+    },
+    "TwoRobotPlaceMugRack-v1": {
+      "v1": {
+        "episodes": 40,
+        "success_at_end": 20,
+        "success_at_end_rate": 0.5,
+        "success_once": 27,
+        "success_once_rate": 0.675,
+        "once_but_not_end": 7,
+        "end_given_once": 0.7407407407407407,
+        "mean_last_normalized_reward_proxy": 0.9125730521976948
+      },
+      "v2": {
+        "episodes": 40,
+        "success_at_end": 13,
+        "success_at_end_rate": 0.325,
+        "success_once": 18,
+        "success_once_rate": 0.45,
+        "once_but_not_end": 5,
+        "end_given_once": 0.7222222222222222,
+        "mean_last_normalized_reward_proxy": 0.7421077772974968
+      },
+      "terminal_transition": {
+        "0->0": 16,
+        "0->1": 4,
+        "1->0": 11,
+        "1->1": 9
+      },
+      "once_transition": {
+        "0->0": 9,
+        "0->1": 4,
+        "1->0": 13,
+        "1->1": 14
+      }
+    },
+    "TwoRobotPlacePlateRack-v1": {
+      "v1": {
+        "episodes": 40,
+        "success_at_end": 28,
+        "success_at_end_rate": 0.7,
+        "success_once": 33,
+        "success_once_rate": 0.825,
+        "once_but_not_end": 5,
+        "end_given_once": 0.8484848484848485,
+        "mean_last_normalized_reward_proxy": 0.8842580117285251
+      },
+      "v2": {
+        "episodes": 40,
+        "success_at_end": 23,
+        "success_at_end_rate": 0.575,
+        "success_once": 33,
+        "success_once_rate": 0.825,
+        "once_but_not_end": 10,
+        "end_given_once": 0.696969696969697,
+        "mean_last_normalized_reward_proxy": 0.8932294264435768
+      },
+      "terminal_transition": {
+        "0->0": 9,
+        "0->1": 3,
+        "1->0": 8,
+        "1->1": 20
+      },
+      "once_transition": {
+        "0->0": 4,
+        "0->1": 3,
+        "1->0": 3,
+        "1->1": 30
+      }
+    },
+    "TwoRobotStirSpoon-v1": {
+      "v1": {
+        "episodes": 40,
+        "success_at_end": 16,
+        "success_at_end_rate": 0.4,
+        "success_once": 16,
+        "success_once_rate": 0.4,
+        "once_but_not_end": 0,
+        "end_given_once": 1.0,
+        "mean_last_normalized_reward_proxy": 0.7107641347916797
+      },
+      "v2": {
+        "episodes": 40,
+        "success_at_end": 13,
+        "success_at_end_rate": 0.325,
+        "success_once": 13,
+        "success_once_rate": 0.325,
+        "once_but_not_end": 0,
+        "end_given_once": 1.0,
+        "mean_last_normalized_reward_proxy": 0.6042714938521385
+      },
+      "terminal_transition": {
+        "0->0": 20,
+        "0->1": 4,
+        "1->0": 7,
+        "1->1": 9
+      },
+      "once_transition": {
+        "0->0": 20,
+        "0->1": 4,
+        "1->0": 7,
+        "1->1": 9
+      }
+    }
+  },
+  "seen_by_level": {
+    "L0": {
+      "v1": {
+        "episodes": 50,
+        "success_at_end": 36,
+        "success_at_end_rate": 0.72,
+        "success_once": 36,
+        "success_once_rate": 0.72,
+        "once_but_not_end": 0,
+        "end_given_once": 1.0,
+        "mean_last_normalized_reward_proxy": 0.9031806108355522
+      },
+      "v2": {
+        "episodes": 50,
+        "success_at_end": 24,
+        "success_at_end_rate": 0.48,
+        "success_once": 26,
+        "success_once_rate": 0.52,
+        "once_but_not_end": 2,
+        "end_given_once": 0.9230769230769231,
+        "mean_last_normalized_reward_proxy": 0.7879549193382264
+      },
+      "terminal_transition": {
+        "0->0": 12,
+        "0->1": 2,
+        "1->0": 14,
+        "1->1": 22
+      },
+      "once_transition": {
+        "0->0": 12,
+        "0->1": 2,
+        "1->0": 12,
+        "1->1": 24
+      }
+    },
+    "L1": {
+      "v1": {
+        "episodes": 50,
+        "success_at_end": 38,
+        "success_at_end_rate": 0.76,
+        "success_once": 40,
+        "success_once_rate": 0.8,
+        "once_but_not_end": 2,
+        "end_given_once": 0.95,
+        "mean_last_normalized_reward_proxy": 0.9311515828967094
+      },
+      "v2": {
+        "episodes": 50,
+        "success_at_end": 31,
+        "success_at_end_rate": 0.62,
+        "success_once": 32,
+        "success_once_rate": 0.64,
+        "once_but_not_end": 1,
+        "end_given_once": 0.96875,
+        "mean_last_normalized_reward_proxy": 0.8107548677921295
+      },
+      "terminal_transition": {
+        "0->0": 7,
+        "0->1": 5,
+        "1->0": 12,
+        "1->1": 26
+      },
+      "once_transition": {
+        "0->0": 6,
+        "0->1": 4,
+        "1->0": 12,
+        "1->1": 28
+      }
+    },
+    "L2": {
+      "v1": {
+        "episodes": 50,
+        "success_at_end": 24,
+        "success_at_end_rate": 0.48,
+        "success_once": 37,
+        "success_once_rate": 0.74,
+        "once_but_not_end": 13,
+        "end_given_once": 0.6486486486486487,
+        "mean_last_normalized_reward_proxy": 0.8815862450934947
+      },
+      "v2": {
+        "episodes": 50,
+        "success_at_end": 21,
+        "success_at_end_rate": 0.42,
+        "success_once": 31,
+        "success_once_rate": 0.62,
+        "once_but_not_end": 10,
+        "end_given_once": 0.6774193548387096,
+        "mean_last_normalized_reward_proxy": 0.8038379943370819
+      },
+      "terminal_transition": {
+        "0->0": 17,
+        "0->1": 9,
+        "1->0": 12,
+        "1->1": 12
+      },
+      "once_transition": {
+        "0->0": 8,
+        "0->1": 5,
+        "1->0": 11,
+        "1->1": 26
+      }
+    },
+    "L3": {
+      "v1": {
+        "episodes": 50,
+        "success_at_end": 14,
+        "success_at_end_rate": 0.28,
+        "success_once": 21,
+        "success_once_rate": 0.42,
+        "once_but_not_end": 7,
+        "end_given_once": 0.6666666666666666,
+        "mean_last_normalized_reward_proxy": 0.6848228839039803
+      },
+      "v2": {
+        "episodes": 50,
+        "success_at_end": 19,
+        "success_at_end_rate": 0.38,
+        "success_once": 26,
+        "success_once_rate": 0.52,
+        "once_but_not_end": 7,
+        "end_given_once": 0.7307692307692307,
+        "mean_last_normalized_reward_proxy": 0.683704254180193
+      },
+      "terminal_transition": {
+        "0->0": 26,
+        "0->1": 10,
+        "1->0": 5,
+        "1->1": 9
+      },
+      "once_transition": {
+        "0->0": 17,
+        "0->1": 12,
+        "1->0": 7,
+        "1->1": 14
+      }
+    }
+  },
+  "protocol_checks": {
+    "same_case_key_set": true,
+    "field_mismatch_counts": {
+      "reference": 0,
+      "reference_source": 0,
+      "task_id": 0,
+      "seed": 0,
+      "max_episode_steps": 0,
+      "actual_environment_class": 0,
+      "environment_dispatch": 0,
+      "actual_environment_flags": 0,
+      "actual_environment_source": 0,
+      "actual_environment_source_sha256": 0,
+      "executed_control_steps": 0,
+      "policy_queries": 0,
+      "simulated_seconds": 0,
+      "is_pilot": 0
+    },
+    "same_shard_case_device_mapping": true,
+    "all_records_completed_process_exit_verified_zero": {
+      "v1": true,
+      "v2": true
+    },
+    "unchanged_function_ast": {
+      "native_eval.py:run_episode": true,
+      "native_eval.py:joint_actions": true,
+      "native_model.py:predict_action": true
+    }
+  },
+  "normalization_geometry": {
+    "error_gain_min": 1.1768149836311985,
+    "error_gain_median": 1.4185527669822378,
+    "error_gain_max": 2.3447103996558836
+  },
+  "normalization_per_joint": [
+    {
+      "action_dim": 0,
+      "arm": "left",
+      "joint": 1,
+      "q01": -0.8279968202114105,
+      "q99": 0.5889795303344729,
+      "min": -1.2082843780517578,
+      "max": 0.853547990322113,
+      "quantile_span_rad": 1.4169763505458834,
+      "minmax_span_rad": 2.061832368373871,
+      "denormalized_error_gain_v2_over_v1": 1.455092999667609,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.374482593522796
+    },
+    {
+      "action_dim": 1,
+      "arm": "left",
+      "joint": 2,
+      "q01": -0.33414342999458313,
+      "q99": 1.1121904969215402,
+      "min": -0.6124336123466492,
+      "max": 1.2985615730285645,
+      "quantile_span_rad": 1.4463339269161233,
+      "minmax_span_rad": 1.9109951853752136,
+      "denormalized_error_gain_v2_over_v1": 1.321268311426423,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.513697091426364
+    },
+    {
+      "action_dim": 2,
+      "arm": "left",
+      "joint": 3,
+      "q01": -0.435317525267601,
+      "q99": 0.8951649844646461,
+      "min": -0.8942162394523621,
+      "max": 1.480495572090149,
+      "quantile_span_rad": 1.330482509732247,
+      "minmax_span_rad": 2.374711811542511,
+      "denormalized_error_gain_v2_over_v1": 1.7848500782023884,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.1205422933977176
+    },
+    {
+      "action_dim": 3,
+      "arm": "left",
+      "joint": 4,
+      "q01": -2.8919870853424072,
+      "q99": -0.9876119554042816,
+      "min": -2.9965550899505615,
+      "max": -0.3646847903728485,
+      "quantile_span_rad": 1.9043751299381255,
+      "minmax_span_rad": 2.631870299577713,
+      "denormalized_error_gain_v2_over_v1": 1.3820125342968663,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.4471648775729449
+    },
+    {
+      "action_dim": 4,
+      "arm": "left",
+      "joint": 5,
+      "q01": -0.5344442069530487,
+      "q99": 1.6942944407463074,
+      "min": -1.039554476737976,
+      "max": 1.99078369140625,
+      "quantile_span_rad": 2.2287386476993563,
+      "minmax_span_rad": 3.030338168144226,
+      "denormalized_error_gain_v2_over_v1": 1.359665105315211,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.4709504510938671
+    },
+    {
+      "action_dim": 5,
+      "arm": "left",
+      "joint": 6,
+      "q01": 0.8347347259521485,
+      "q99": 2.931930422782898,
+      "min": 0.6895084977149963,
+      "max": 3.157519817352295,
+      "quantile_span_rad": 2.0971956968307497,
+      "minmax_span_rad": 2.4680113196372986,
+      "denormalized_error_gain_v2_over_v1": 1.1768149836311985,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.6995024942907926
+    },
+    {
+      "action_dim": 6,
+      "arm": "left",
+      "joint": 7,
+      "q01": -2.3598700761795044,
+      "q99": 1.733875346183777,
+      "min": -2.9037575721740723,
+      "max": 2.1951732635498047,
+      "quantile_span_rad": 4.093745422363281,
+      "minmax_span_rad": 5.098930835723877,
+      "denormalized_error_gain_v2_over_v1": 1.2455417495844945,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.6057269864034573
+    },
+    {
+      "action_dim": 8,
+      "arm": "right",
+      "joint": 1,
+      "q01": -0.5277015209197998,
+      "q99": 0.4037346839904785,
+      "min": -0.7027666568756104,
+      "max": 0.6655169725418091,
+      "quantile_span_rad": 0.9314362049102783,
+      "minmax_span_rad": 1.3682836294174194,
+      "denormalized_error_gain_v2_over_v1": 1.4690041273940182,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.3614665627576943
+    },
+    {
+      "action_dim": 9,
+      "arm": "right",
+      "joint": 2,
+      "q01": -0.09837465286254883,
+      "q99": 0.9814726412296302,
+      "min": -0.6089056134223938,
+      "max": 1.3915082216262817,
+      "quantile_span_rad": 1.079847294092179,
+      "minmax_span_rad": 2.0004138350486755,
+      "denormalized_error_gain_v2_over_v1": 1.8524969650735765,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.079623900987371
+    },
+    {
+      "action_dim": 10,
+      "arm": "right",
+      "joint": 3,
+      "q01": -0.4583364725112915,
+      "q99": 0.0666867561638357,
+      "min": -0.7150741815567017,
+      "max": 0.5159532427787781,
+      "quantile_span_rad": 0.5250232286751272,
+      "minmax_span_rad": 1.2310274243354797,
+      "denormalized_error_gain_v2_over_v1": 2.3447103996558836,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 0.852983805715847
+    },
+    {
+      "action_dim": 11,
+      "arm": "right",
+      "joint": 4,
+      "q01": -2.8204653024673463,
+      "q99": -1.2720316052436822,
+      "min": -2.9967825412750244,
+      "max": -0.26500388979911804,
+      "quantile_span_rad": 1.548433697223664,
+      "minmax_span_rad": 2.7317786514759064,
+      "denormalized_error_gain_v2_over_v1": 1.7642206162097709,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.133645067756194
+    },
+    {
+      "action_dim": 12,
+      "arm": "right",
+      "joint": 5,
+      "q01": -1.4564635634422303,
+      "q99": 0.31590727567672783,
+      "min": -1.7379193305969238,
+      "max": 0.6755621433258057,
+      "quantile_span_rad": 1.772370839118958,
+      "minmax_span_rad": 2.4134814739227295,
+      "denormalized_error_gain_v2_over_v1": 1.3617248832205264,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.4687254559598932
+    },
+    {
+      "action_dim": 13,
+      "arm": "right",
+      "joint": 6,
+      "q01": 1.1885177493095398,
+      "q99": 2.643244242668152,
+      "min": 0.7181323766708374,
+      "max": 3.150730848312378,
+      "quantile_span_rad": 1.4547264933586121,
+      "minmax_span_rad": 2.4325984716415405,
+      "denormalized_error_gain_v2_over_v1": 1.6722033198317974,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.1960268086306483
+    },
+    {
+      "action_dim": 14,
+      "arm": "right",
+      "joint": 7,
+      "q01": -0.06840497702360153,
+      "q99": 2.131240296363832,
+      "min": -0.6685386300086975,
+      "max": 2.286454439163208,
+      "quantile_span_rad": 2.199645273387434,
+      "minmax_span_rad": 2.9549930691719055,
+      "denormalized_error_gain_v2_over_v1": 1.3433952760125012,
+      "central98_normalized_span_v1": 2.0,
+      "central98_normalized_span_v2": 1.488765098189454
+    }
+  ],
+  "ema": {
+    "source_compatible_recipe_and_update_order": true,
+    "optimization_step": 45000,
+    "parameter_count": 433,
+    "decay_at_45000": 0.9998000399920016,
+    "local_time_scale_updates_at_45000": 5001,
+    "not_proven": "No existing raw-vs-EMA rollout comparison was used, and no new one was run. Correct source and actual EMA loading do not prove EMA caused or improved the score change."
+  },
+  "training_health": {
+    "v1": {
+      "logged_records": 226,
+      "grad_median": 0.11303513124585152,
+      "grad_max": 0.7082942724227905,
+      "grad_above1_records": 0,
+      "final": {
+        "step": 45000,
+        "loss": 0.001725789625197649,
+        "grad_norm_rank0": 0.06162121891975403,
+        "grad_clip_coefficient_rank0": null,
+        "learning_rate": 1e-06
+      }
+    },
+    "v2": {
+      "logged_records": 226,
+      "grad_median": 0.10386360809206963,
+      "grad_max": 0.7073699831962585,
+      "grad_above1_records": 0,
+      "final": {
+        "step": 45000,
+        "loss": 0.010998781770467758,
+        "grad_norm_rank0": 0.03836725279688835,
+        "grad_clip_coefficient_rank0": 1.0,
+        "learning_rate": 1e-06
+      }
+    }
+  },
+  "causal_attribution_established": false,
+  "c45_health_gate_implemented": false,
+  "c45_main_conclusion": "Treat the old C45 result as a completed but optimization-compromised run. Preserve every score and failure as evidence; it cannot establish a clean C45 scaling/capability conclusion. Source differences are candidates, not an established root cause. Continue assessing the already-running single v2 recipe from existing telemetry; no new experiment is recommended in this review.",
+  "c45_recommendations_not_executed": [
+    "Keep current recipe and existing run identity fixed. Read existing loss, preclip global norms, sampled module norms, clipping coefficient, LR and update progress together, separately for Ck pretrain and target FT. Do not compare raw epsilon loss across v1/v2 normalization/perturbation as if it were a common validation metric.",
+    "A first-step or occasional norm above1 that recovers is not a failed run. An isolated outlier warrants noting. A sustained trend rising by orders of magnitude across successive logged windows, pervasive tiny clipping coefficients and loss that ceases to improve or rebounds is a training-health failure requiring review even when all values remain finite.",
+    "Use sampled module norms to localize prompt Transformer versus U-Net dominance only. They do not expose exact trigger batch, attention activations, Adam moments or update norms; do not name a responsible module without evidence. No extra forward/test is required for this readout.",
+    "Separate a runnable checkpoint and valid rollout record from an optimization-healthy scientific comparison. Preserve the old abnormal checkpoint and raw success rates with an optimization-compromised label; do not delete them, relabel them as v2, or claim normal scaling degradation.",
+    "Before declaring formal capability/scaling conclusions, require clean worker exits, full fixed budget/provenance/EMA identity checks, and no unresolved sustained pathological optimization signature. A recurrence like old C45 should block clean capability claims for the affected checkpoint and its FT descendants. This proposed scientific gate is not currently enforced by pipeline.py, which checks completion/provenance/runtime metadata but not a finite large-norm trend.",
+    "Normal v2 C15/Scratch diagnostics do not clear v2 C45 in advance. Current C15 FT initial clipping alone is not recurrence. Assess completed C30/C45 only when their ordinary primary logs exist; do not add ablations."
+  ]
+}

@@ -6,11 +6,26 @@
 
 ## Status and results
 
-**The completed measurements below belong to archived v1 (`legacy_quantile`, DDIM clip1). They are not results of the corrected v2 recipe.** All seven training checkpoints and ten unique evaluation groups were independently verified: 2,000 completed rollouts, clean worker exits and checkpoint hashes. The authoritative record is v1 review.json (local run artifact: `results/review/all_scales_v1_clip1/review.json`), archived on 2026-11-16; full precision values are in [groups.csv](metrics/v1_clip1/groups.csv).
+**The tables labeled archived v1 belong to archived v1 (`legacy_quantile`, DDIM clip1). They are not results of the corrected v2 recipe.** All seven training checkpoints and ten unique evaluation groups were independently verified: 2,000 completed rollouts, clean worker exits and checkpoint hashes. The authoritative record is v1 review.json (local run artifact: `results/review/all_scales_v1_clip1/review.json`), archived on 2026-11-16; full precision values are in [groups.csv](metrics/v1_clip1/groups.csv).
 
 V1 used unclipped q01/q99-normalized action targets during training, but inherited a DDIM sampler with `clip_sample=True`, range 1. Its final normalized predictions are restricted to `[-1,1]`, so raw joint targets outside the training quantiles are not representable through that sampler. This is a confirmed training/sampling support mismatch. It is separate from robot-controller clipping; zero controller clip counts do not rule it out. The scores do not establish how much this mismatch caused any failure or the C45 decline.
 
-The accepted v2 recipe combines three corrections: `train_minmax_joint14_gripper_identity_v2` for the 14 joint targets and identity grippers; source input perturbation `0.1`; and source EMA updates. State normalization and DDIM clip1 remain. V2 implementation and pre-retraining review are complete. **Formal v2 C15 training is running, started on 2026-11-16 at 04:39 UTC; no v2 evaluation scores are available yet.** Old weights cannot be relabeled as v2 by swapping their statistics. Use separate v2 checkpoints, manifests and output roots.
+The accepted v2 recipe combines three corrections: `train_minmax_joint14_gripper_identity_v2` for the 14 joint targets and identity grippers; source input perturbation `0.1`; and source EMA updates. State normalization and DDIM clip1 remain. V2 implementation and pre-retraining review are complete. **As of 2026-11-16 14:47 Asia/Shanghai, v2 C15 has completed all four regimes; C30 training is active and C45 is pending.** Old weights cannot be relabeled as v2 by swapping their statistics. Use separate v2 checkpoints, manifests and output roots.
+
+### Corrected v2 — C15 complete
+
+All four groups have 200 completed, clean-exit rollouts with actual EMA inference and passing case/manifest checks (800 total). C30/C45 results are pending; no three-scale v2 mean is available.
+
+| Regime | Terminal SR (%) | Once SR (%) | Released-code reward proxy |
+|---|---:|---:|---:|
+| Seen | 47.5 | 57.5 | 0.7716 |
+| Zero-shot | 3.0 | 3.0 | 0.1505 |
+| Scratch | 5.0 | 5.0 | 0.2412 |
+| P+FT | 37.5 | 38.0 | 0.6111 |
+
+Seen changes from 112/200 to 95/200: 43 previous successes fail and 26 previous failures succeed. Both C15 training logs have no recorded gradient norm above1; this regression is not the old C45 gradient pathology. Min/max, epsilon perturbation and raw-to-EMA evaluation changed together, so existing evidence does not isolate their causal contributions. The reward proxy remains distinct from paper-defined Sub-SR. See the [C15 comparison and C45 handling analysis (Chinese)](metrics/v2_c15/analysis_CN.md).
+
+EMA does not feed back into raw training gradients. Current code rejects nonfinite loss/gradients but has no automatic gate for sustained extreme finite gradients; the analysis recommends such a gate, without changing the running recipe or adding model experiments.
 
 ### Primary metric: terminal success rate (%) — archived v1
 
@@ -213,7 +228,7 @@ TARGET_FEATURES="$BPP_ROOT/cache/bpp_frozen_cls/manifests/scratch-human-3ceb62b3
 
 For Scratch use the target manifests, `--regime scratch --max-updates 3000`, the same v2 normalization mode and a separate target-only output directory. For P+FT use `--regime finetune --pretraining-scale c15 --initialize-from "$V2_RUN_ROOT/training/c15/final.pt"`, the target manifests and 3,000 updates. C30/C45 use their corresponding manifests and 90,000/135,000 updates. Every v2 Ck and Scratch starts from the common external LIBERO checkpoint; P+FT/resume must retain the same v2 mode. Legacy native checkpoints remain readable as `legacy_quantile`, but are rejected as v2 initialization/resume sources.
 
-The v2 staged runner reserves `results/pipeline/bpp_human_minmax_v2`, with C15 in its own `training/c15`, then sequences C15, C30 and C45. Existing prepared-input evidence is reused from the v1 root; this does not reuse v1 trained checkpoints or scores. Review has passed and C15 training is active. The first command only declares a plan; the run/monitor commands document the active configuration, with monitor reading current progress:
+The v2 staged runner reserves `results/pipeline/bpp_human_minmax_v2`, with C15 in its own `training/c15`, then sequences C15, C30 and C45. Existing prepared-input evidence is reused from the v1 root; this does not reuse v1 trained checkpoints or scores. C15 has completed all four regimes and C30 training is active. The first command only declares a plan; the run/monitor commands document the active configuration, with monitor reading current progress:
 
 ```bash
 "$BPP_ROOT/envs/downloader/bin/python" "$BPP_BASELINE_DIR/run_bpp_imitator.py" plan \
