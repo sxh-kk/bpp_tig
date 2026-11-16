@@ -1,5 +1,5 @@
 {
-  "schema": "bpp_tig_v2_public_artifact_manifest_v2",
+  "schema": "bpp_tig_public_artifact_manifest_v1",
   "files": [
     {
       "path": "groups.csv",
@@ -68,8 +68,8 @@
     },
     {
       "path": "resource_accounting/RESOURCE_NOTES.md",
-      "bytes": 2234,
-      "sha256": "82646e3b23bed5c64442a5e7720516c254cff10533c72617066881be80cffdae"
+      "bytes": 2229,
+      "sha256": "4290b5f4e5496ea9e4c800ab5261fe70384ae47945d990b75e623088f467fc1c"
     },
     {
       "path": "resource_accounting/formal_resource_accounting.json",
@@ -108,8 +108,8 @@
     },
     {
       "path": "scientific_review.json",
-      "bytes": 7592,
-      "sha256": "910ca6c3d088ecab63516ca76fe98e221fc938a1bd22e5ecafc9d63cb1857d4f"
+      "bytes": 7385,
+      "sha256": "f17d33d70c35e2ff534f56ae96b0ea5e7fe5f67d75e669f38c41676a831a82f9"
     },
     {
       "path": "training.csv",

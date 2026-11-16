@@ -1,8 +1,8 @@
 # Training health gate / 训练健康门槛
 
-**Deployment verified: 2026-11-16 16:04 Asia/Shanghai.** The live C30 producer was retained, all four frozen training-source hashes matched, and the guardian heartbeat/worker identity were verified. Deployment evidence remains in `results/preflight/bpp_training_health_activation.json`.
+**Completed: all four scoped stages admitted; guardian ended normally. Deployment verified: 2026-11-16 16:04 Asia/Shanghai.** The live C30 producer was retained, all four frozen training-source hashes matched, and the guardian heartbeat/worker identity were verified. Deployment evidence remains in `results/preflight/bpp_training_health_activation.json`.
 
-**已部署并核验：北京时间2026-11-16 16:04。** 当前C30进程保持原样，四份冻结训练源码hash一致，已核验守护进程心跳和worker身份。部署证据保存在 `results/preflight/bpp_training_health_activation.json`。
+**本轮已结束：四个受控阶段均通过准入，guardian正常结束。部署核验时间：北京时间2026-11-16 16:04。** 当前C30进程保持原样，四份冻结训练源码hash一致，已核验守护进程心跳和worker身份。部署证据保存在 `results/preflight/bpp_training_health_activation.json`。
 
 ## Scope and unchanged recipe / 范围与既定配方
 
@@ -17,13 +17,13 @@ The gate covers only these stages under `results/pipeline/bpp_human_minmax_v2`:
 | `training/c45` | 135,000 updates |
 | `training/c45_finetune` | 3,000 updates |
 
-Continue the accepted v2 recipe: train-only joint14 min/max, gripper identity, source epsilon perturbation `0.1`, EMA, the existing query-state quantile statistics and DDIM clip1. The guard does not change the learning rate, optimizer, batch size, update budget, normalization, EMA schedule, sampler or model architecture. It adds no forward/backward pass and no model experiment. No additional tests, training comparisons, ablations or evaluations are requested by this change.
+Continue the accepted training recipe: train-only joint14 min/max, gripper identity, source epsilon perturbation `0.1`, EMA, the existing query-state quantile statistics and DDIM clip1. The guard does not change the learning rate, optimizer, batch size, update budget, normalization, EMA schedule, sampler or model architecture. It adds no forward/backward pass and no model experiment. No additional tests, training comparisons, ablations or evaluations are requested by this change.
 
-继续已接受的 v2 配方：joint14 使用训练集 min/max、夹爪 identity、源 epsilon perturbation `0.1`、EMA，并保留既有 query-state 分位数统计与 DDIM clip1。守护程序不改学习率、优化器、batch、更新预算、归一化、EMA 调度、采样器或模型架构，不增加 forward/backward 或模型实验。本次不增加测试、训练对照、消融或评测。
+继续已接受的训练配方：joint14 使用训练集 min/max、夹爪 identity、源 epsilon perturbation `0.1`、EMA，并保留既有 query-state 分位数统计与 DDIM clip1。守护程序不改学习率、优化器、batch、更新预算、归一化、EMA 调度、采样器或模型架构，不增加 forward/backward 或模型实验。本次不增加测试、训练对照、消融或评测。
 
-The policy is independent of held-out success rate. It neither selects a checkpoint by SR nor treats a health pass as evidence of task capability. C15, shared Scratch and historical v1 artifacts keep their existing identities.
+The policy is independent of held-out success rate. It neither selects a checkpoint by SR nor treats a health pass as evidence of task capability. C15 and shared Scratch had already completed before deployment; historical measurements are described in HISTORY.md.
 
-策略不使用 held-out 成功率，不按 SR 选 checkpoint；健康门槛通过也不等于具备任务能力。C15、共享 Scratch 与历史 v1 产物继续保留原身份。
+策略不使用 held-out 成功率，不按 SR 选 checkpoint；健康门槛通过也不等于具备任务能力。C15与共享Scratch在部署前已完成；历史测评统一见HISTORY.md。
 
 ## Signals and stopping rules / 观测量与停止条件
 
@@ -44,9 +44,9 @@ Rule A does not require a loss plateau. Rule B requires both persistent high nor
 
 规则 A 不要求 loss 停滞。规则 B 同时要求持续高范数和 loss 中位数下降不超过2%，也包括不变或上升。训练器已有 NaN/Inf 检查继续生效。单次有限尖峰，包括单次 norm 大于1，不触发上述持续性规则。
 
-These are engineering stop thresholds, not a calibrated detector of every optimization failure. With clip1, preclip norms of 10 and 100 imply clip coefficients of approximately 0.1 and 0.01. The 8/10 requirement and update span distinguish persistence from one logged spike. They do not imply that AdamW parameter updates shrink by the same factors. Historical v1 C45 had sustained norms in the hundreds to billions; that observation motivates a finite-gradient gate but does not establish its root cause or prove that v2 fixes it. The thresholds are not tuned against SR.
+These are engineering stop thresholds, not a calibrated detector of every optimization failure. With clip1, preclip norms of 10 and 100 imply clip coefficients of approximately 0.1 and 0.01. The 8/10 requirement and update span distinguish persistence from one logged spike. They do not imply that AdamW parameter updates shrink by the same factors. The background and historical optimization diagnostics are consolidated in HISTORY.md; the gate does not identify a root cause. The thresholds are not tuned against SR.
 
-这是工程停止阈值，不是能检出全部优化失败的已校准检测器。clip1 下，裁剪前范数10与100对应约0.1与0.01的裁剪系数；8/10及更新跨度要求用于区分持续异常与单次记录尖峰。不能据此声称 AdamW 参数更新按相同比例缩小。历史 v1 C45 曾有数百至数十亿的持续梯度范数；该观察支持增加有限梯度门槛，但未确定根因，也未证明 v2 已修复。阈值不按 SR 调整。
+这是工程停止阈值，不是能检出全部优化失败的已校准检测器。clip1 下，裁剪前范数10与100对应约0.1与0.01的裁剪系数；8/10及更新跨度要求用于区分持续异常与单次记录尖峰。不能据此声称 AdamW 参数更新按相同比例缩小。门槛背景与历史优化诊断统一见HISTORY.md；门槛本身不定位根因。阈值不按 SR 调整。
 
 Sparse 200-update logs can miss events between records. A pass means only that the available log did not meet the specified rejection conditions and passed admission checks. It does not certify stability or explain why a trigger occurred.
 
@@ -99,32 +99,32 @@ source $BPP_ROOT/storage.env
 cd "$BPP_ROOT/repos/The-Imitator-Game"
 export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
 BPP_HEALTH_PYTHON=/usr/bin/python3
-V2_RUN_ROOT="$BPP_ROOT/results/pipeline/bpp_human_minmax_v2"
+BPP_RUN_ROOT="$BPP_ROOT/results/pipeline/bpp_human_minmax_v2"
 
 # Pin the policy and original-source provenance first / 先固定策略与原源码来源。
-"$BPP_RUNTIME_PYTHON" -m examples.baselines.bpp.bpp.training_health_guard arm \
-  --run-root "$V2_RUN_ROOT"
+"$BPP_HEALTH_PYTHON" -m examples.baselines.bpp.bpp.training_health_guard arm \
+  --run-root "$BPP_RUN_ROOT"
 
 # Run in the project's existing supervised/background execution context.
 # 在项目既有的监督/后台执行环境中运行。
-"$BPP_RUNTIME_PYTHON" -m examples.baselines.bpp.bpp.training_health_guard watch \
-  --run-root "$V2_RUN_ROOT" --poll-seconds 5
+"$BPP_HEALTH_PYTHON" -m examples.baselines.bpp.bpp.training_health_guard watch \
+  --run-root "$BPP_RUN_ROOT" --poll-seconds 5
 ```
 
 ```bash
 # Inspect guardian status / 查看守护状态。
-"$BPP_RUNTIME_PYTHON" -m examples.baselines.bpp.bpp.training_health_guard status \
-  --run-root "$V2_RUN_ROOT"
+"$BPP_HEALTH_PYTHON" -m examples.baselines.bpp.bpp.training_health_guard status \
+  --run-root "$BPP_RUN_ROOT"
 
 # Assess an active stage's available log; completion is not required.
 # 评估在跑阶段的已有日志；不要求阶段完成。
-"$BPP_RUNTIME_PYTHON" -m examples.baselines.bpp.bpp.training_health assess \
-  --output "$V2_RUN_ROOT/training/c30"
+"$BPP_HEALTH_PYTHON" -m examples.baselines.bpp.bpp.training_health assess \
+  --output "$BPP_RUN_ROOT/training/c30"
 
 # Check final admission using the original full-log evidence.
 # 用完整原始证据执行最终验收。
-"$BPP_RUNTIME_PYTHON" -m examples.baselines.bpp.bpp.training_health check \
-  --output "$V2_RUN_ROOT/training/c30"
+"$BPP_HEALTH_PYTHON" -m examples.baselines.bpp.bpp.training_health check \
+  --output "$BPP_RUN_ROOT/training/c30"
 ```
 
 `assess` and `check` are read-only CLI commands and print JSON; the pipeline/guardian writes the durable admission records. An active-stage assessment does not grant final admission. `not_scoped` is not a health pass; an unarmed run with neither a policy nor a required sentinel has no policy to enforce.
@@ -153,12 +153,8 @@ The health policy and watcher are standard-library sidecars, in `bpp/training_he
 
 健康策略与守护程序为只使用标准库的独立模块，位于 `bpp/training_health.py` 与 `bpp/training_health_guard.py`。保留在跑训练器的源码 hash 和实验身份；不改写既有 manifest，不能把后来加入的守护程序写成原数值配方的一部分。策略版本/源码 hash 与部署证据应独立于 trainer/model/data/cache 的来源记录保存。本文标记为已部署前，主代理必须核验实际源码 hash、策略/状态产物、PID 校验、停止行为与验收接入。
 
-The rationale above derives from the existing training implementation and the preserved [C15 v2 / C45 read-only analysis](metrics/v2_c15/analysis_CN.md). This document introduces no new empirical claim about v2 C30/C45 health, root cause or success rate.
-
-阈值依据来自既有训练实现与已保存的 [C15 v2 / C45 只读分析](metrics/v2_c15/analysis_CN.md)。本文不新增关于 v2 C30/C45 健康情况、根因或成功率的实测结论。
-
 ## Completed run / 本轮已完成
 
-The v2 run finished measurements at 2026-11-16 22:34 Asia/Shanghai. C30/C45 and both target fine-tuning stages passed complete-log admission. The guardian ended with `pipeline_finished`, which is a normal terminal state. A temporary supervisor interruption was recovered without restarting C45; `orphan_exit_observer.py` recorded its actual supervisor reap exit status 0. See `FINAL_REVIEW_CN.md` and the final audit for the preserved evidence. Long-running supervisors should run in an independent session or managed service, with persistent log files.
+The run finished measurements at 2026-11-16 22:34 Asia/Shanghai. C30/C45 and both target fine-tuning stages passed complete-log admission. The guardian ended with `pipeline_finished`, which is a normal terminal state. A temporary supervisor interruption was recovered without restarting C45; `orphan_exit_observer.py` recorded its actual supervisor reap exit status 0. See `FINAL_REVIEW_CN.md` and the final audit for the preserved evidence. Long-running supervisors should run in an independent session or managed service, with persistent log files.
 
 本轮于北京时间2026-11-16 22:34完成测量，四个受控训练阶段均通过全日志准入。guardian 的 `pipeline_finished` 是正常结束。监督进程曾中断，恢复时没有重启C45；独立退出观察器记录到原训练的真实退出码0。完整证据和解释边界见 `FINAL_REVIEW_CN.md`。长时监督进程应使用独立会话或托管服务，并将日志写入持久目录。

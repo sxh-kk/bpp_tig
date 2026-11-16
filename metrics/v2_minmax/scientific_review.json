@@ -101,10 +101,10 @@
       "detail": "Healthy optimization, nonzeroSR and normal process exits establish admissible system measurements, not proof that all remaining adaptations are lossless, human prompts are causally used, or any individual mechanism caused successes/failures."
     }
   ],
-  "prompt_causality": "No formalv2 prompt ablation was run. TheseSRs alone do not demonstrate causal use of human prompts.",
-  "c15_regression": "C15Seen56%v1 to47.5%v2 is retained;43old successes became failures and26old failures became successes. Recipe and EMA changes are joint; no isolated cause is established.",
-  "c45_gradient_observation": "v2 max logged preclip norm0.7146769762 versus about2.80e9 in historicalv1; no abnormal-gradient health stop. Joint recipe changed; old trigger and individual contributions remain unestablished.",
+  "prompt_causality": "No formal prompt ablation was run. TheseSRs alone do not demonstrate causal use of human prompts.",
+  "c45_gradient_observation": "Max logged preclip norm0.7146769762; scoped stages passed full-log health admission. See the historical record for earlier-run comparisons.",
   "monitoring_interruption": "A supervision interruption was recovered without restarting the original training producer. Actual clean process exit was independently observed. Sender and cause of the interruption were not verified. Operational identities and event timeline are retained locally.",
   "new_experiments_during_review": 0,
-  "new_test_suites_during_review": 0
+  "new_test_suites_during_review": 0,
+  "historical_record": "../../HISTORY.md"
 }
