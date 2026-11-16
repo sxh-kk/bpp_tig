@@ -1,0 +1,61 @@
+{
+  "schema": "bpp_tig_v2_public_resource_summary_v1",
+  "export_kind": "aggregate resource accounting only; no internal paths, process identities, physical device mappings, interval records, or filesystem-free-space metadata",
+  "original_report_sha256": "5b10e101033ec35dcf3b7658584898f0d0cbd86f17e38bf332b82b4e9b6c8459",
+  "hardware": {
+    "gpu_model": "A800",
+    "gpu_count": 8
+  },
+  "recorded_assigned_gpu_wall_hours": 78.6333384131723,
+  "training_gpu_hours": 68.69921959777776,
+  "evaluation_gpu_hours": 9.934118815394541,
+  "formal_pipeline_elapsed_wall_seconds": 35712.62969708443,
+  "formal_pipeline_elapsed_wall_hours": 9.920174915856785,
+  "hypothetical_continuous_eight_gpu_reservation_hours": 79.36139932685428,
+  "scope": "Per-GPU unions of assigned formal process wall intervals; not kernel utilization, energy, FLOPs, invoice, or measured exclusive reservation. Downloads, preprocessing and historicalv1 work are excluded.",
+  "training_stages": 7,
+  "training_updates": 282000,
+  "query_window_draws": 18048000,
+  "unique_evaluation_groups": 10,
+  "unique_rollouts": 2000,
+  "storage": {
+    "referenced_logical_bytes": 576474423478,
+    "referenced_logical_gib": 536.8836442735046,
+    "reused_cache_logical_gib": 449.080857,
+    "retained_v2_checkpoint_logical_gib": 61.314279,
+    "retained_v2_checkpoint_files": 10,
+    "scope": "Existing referenced-file logical sizes; not full project usage, allocated blocks, or newv2 downloads."
+  },
+  "storage_categories": [
+    {
+      "category": "current_formal_evaluation_outputs",
+      "file_count": "4000",
+      "logical_bytes": "496410917"
+    },
+    {
+      "category": "frozen_cls_cache",
+      "file_count": "11499",
+      "logical_bytes": "9636824448"
+    },
+    {
+      "category": "known_checkpoints",
+      "file_count": "11",
+      "logical_bytes": "72750188546"
+    },
+    {
+      "category": "referenced_manifests_and_other_files",
+      "file_count": "55",
+      "logical_bytes": "113773676"
+    },
+    {
+      "category": "referenced_raw_dataset",
+      "file_count": "992",
+      "logical_bytes": "20917151555"
+    },
+    {
+      "category": "rgb_numeric_cache",
+      "file_count": "29900",
+      "logical_bytes": "472560074336"
+    }
+  ]
+}

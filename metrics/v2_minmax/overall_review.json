@@ -1,0 +1,19 @@
+{
+  "schema": "bpp_tig_v2_public_overall_review_summary_v1",
+  "status": "complete",
+  "scope": "BPP-LIBERO initialized human-RGB dual-armTIG; three scales/four regimes",
+  "machine_original_sha256": "c655713de50c261a2c0188eacb83be5d6138813f6273676ff58dd405dbd71d5a",
+  "scientific_original_sha256": "acdfdf3f1ceac3819d63b121230bd09e88ecf43154af99eaf8331b748d702a73",
+  "original_overall_review_sha256": "63e82013cec3700bd0da1120b08783a0d3235fb0f436e68589844ebc46ae656a",
+  "training_stages": 7,
+  "unique_evaluation_groups": 10,
+  "verified_unique_rollouts": 2000,
+  "issues": [],
+  "scientific_review_complete": true,
+  "manual_human_signoff_claimed": false,
+  "frozen_training_sources_unchanged": true,
+  "new_model_experiments_during_review": 0,
+  "new_test_suites_during_review": 0,
+  "other_BPP_checkpoints_evaluated": false,
+  "export_kind": "public summary; original audit records retained locally"
+}

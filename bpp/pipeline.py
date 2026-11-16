@@ -497,6 +497,58 @@ def inspect_checkpoint(config, path):
     return json.loads(completed.stdout)
 
 
+def pending_orphan_exit_observation(output, process):
+    """Wait briefly for a live, identity-bound observer to publish a real reap code."""
+    record = read_json(Path(output) / "exit_observer_status.json", {})
+    if record.get("schema") != "orphan_exit_observer_status_v1" or record.get("status") != "observing":
+        return None
+    try:
+        if Path(record["output_dir"]).resolve() != Path(output).resolve():
+            return None
+        expected = {key: process[key] for key in ("pid", "command", "started_utc")}
+        if record.get("process_status_identity") != expected:
+            return None
+        producer = record["producer_process"]
+        if producer["pid"] != process["pid"] or producer["command"] != process["command"]:
+            return None
+        observer = record["observer_process"]
+        raw = Path(f"/proc/{observer['pid']}/stat").read_text().rsplit(")", 1)[1].split()
+        command = [x.decode() for x in Path(f"/proc/{observer['pid']}/cmdline").read_bytes().split(b"\0") if x]
+        if raw[0] == "Z" or int(raw[19]) != observer["start_ticks"] or command != observer["command"]:
+            return None
+        source = Path(__file__).with_name("orphan_exit_observer.py")
+        if Path(record["source_path"]).resolve() != source.resolve() or sha256(source) != record["source_sha256"]:
+            return None
+        current_path = Path(f"/proc/{producer['pid']}/stat")
+        try:
+            current = current_path.read_text().rsplit(")", 1)[1].split()
+        except (FileNotFoundError, ProcessLookupError):
+            current = None
+        if current is not None and (current[0] != "Z" or int(current[19]) != producer["start_ticks"]):
+            return None  # A live mismatched or recycled PID is never adopted.
+        current_time = datetime.now(timezone.utc)
+        age = (current_time-datetime.fromisoformat(record["observed_utc"])).total_seconds()
+        if not 0 <= age <= 15:
+            return None
+        wait_path = Path(output) / "exit_observer_wait.json"
+        wait = read_json(wait_path, {})
+        if wait.get("process_status_identity") != expected:
+            wait = {"schema": "orphan_exit_wait_v1", "process_status_identity": expected,
+                    "started_utc": current_time.isoformat(), "maximum_wait_seconds": 75}
+            atomic_json(wait_path, wait)
+        deadline_start = datetime.fromisoformat(wait["started_utc"])
+        if record.get("producer_missing_since_utc"):
+            deadline_start = min(deadline_start, datetime.fromisoformat(record["producer_missing_since_utc"]))
+        elapsed = (current_time-deadline_start).total_seconds()
+        if not 0 <= elapsed <= 75:
+            return None
+        return {"status": "running", "awaiting_verified_exit_observation": True,
+                "observer_pid": observer["pid"], "waited_seconds": elapsed,
+                "producer_pid": producer["pid"], "exit_status_not_yet_confirmed": True}
+    except (OSError, KeyError, TypeError, ValueError):
+        return None
+
+
 def training_contract(config, step, artifacts, *, checkpoint_reader=None, allow_incomplete=False):
     output = Path(step.output)
     training_health_contract(output)
@@ -552,6 +604,12 @@ def training_contract(config, step, artifacts, *, checkpoint_reader=None, allow_
     if process.get("status") == "running":
         observed = process_observation(process, wrapper=None)
         if not observed["alive"] or not observed["matches"]:
+            latest = read_json(output / "process_status.json", {})
+            if latest.get("status") != "running":
+                return training_contract(config, step, artifacts, checkpoint_reader=checkpoint_reader, allow_incomplete=allow_incomplete)
+            exit_wait = pending_orphan_exit_observation(output, process)
+            if exit_wait is not None:
+                return dict(exit_wait, experiment_identity=manifest["experiment_identity"])
             latest = read_json(output / "process_status.json", {})
             if latest.get("status") != "running":
                 return training_contract(config, step, artifacts, checkpoint_reader=checkpoint_reader, allow_incomplete=allow_incomplete)

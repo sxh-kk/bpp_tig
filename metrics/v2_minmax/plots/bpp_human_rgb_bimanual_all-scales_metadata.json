@@ -1,0 +1,55 @@
+{
+  "schema": "bpp_tig_static_scientific_figures_v1",
+  "created_utc": "2026-11-16T14:55:31.297354+00:00",
+  "variant": "BPP human-RGB bimanual adaptation",
+  "measurement_label": "local adapted-model evaluation",
+  "scope": "all-scales",
+  "selected_scales": [
+    "c15",
+    "c30",
+    "c45"
+  ],
+  "full_three_scale_result": true,
+  "selected_measurements_complete": true,
+  "input_review_sha256": "c655713de50c261a2c0188eacb83be5d6138813f6273676ff58dd405dbd71d5a",
+  "input_review_overall_status": "complete",
+  "checkpoint_verification_requested": true,
+  "primary_metric": "success_at_end_rate",
+  "plotted_unit": "percent",
+  "unique_selected_evaluation_groups": 10,
+  "unique_selected_rollouts": 2000,
+  "Scratch_note": "One identical 200-case target-only cohort is reused across scale tables; repeated bars are not independent runs.",
+  "task_set_note": "Seen uses five seen tasks; Zero-shot/Scratch/P+FT use the five held-out tasks.",
+  "uncertainty_note": "One training initialization per regime. No multi-training-seed error bars are shown.",
+  "missing_data_rule": "Reject incomplete/invalid/missing selected measurements; never substitute zero. A plotted zero is a valid measured zero.",
+  "checkpoint_verification_scope": "Inherited from the input case-level review and matched training hashes; plotting does not load checkpoints.",
+  "versions": {
+    "python": "3.12.16",
+    "matplotlib": "3.11.2",
+    "numpy": "1.26.4"
+  },
+  "renderer": "Agg",
+  "raster_dpi": 300,
+  "vector_formats": [
+    "svg",
+    "pdf"
+  ],
+  "style": {
+    "font.family": "DejaVu Sans",
+    "font.size": 9,
+    "axes.labelsize": 9.5,
+    "axes.titlesize": 11,
+    "text.usetex": false,
+    "axes.unicode_minus": false,
+    "svg.fonttype": "path",
+    "svg.hashsalt": "bpp-tig-reviewed-figures",
+    "pdf.fonttype": 42,
+    "savefig.dpi": 300,
+    "figure.dpi": 100
+  },
+  "plot_module_sha256": "bd0058cd4af6d90002a90f4bf8f6f91be5f3f4be53ff6b2a3431b2a31695c06c",
+  "render_warnings": [],
+  "torch_imported": false,
+  "export_kind": "plot provenance summary without operational paths, commands or font files",
+  "overall_scientific_review_complete": true
+}

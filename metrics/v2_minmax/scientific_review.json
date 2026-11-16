@@ -1,0 +1,110 @@
+{
+  "schema": "bpp_tig_v2_public_scientific_review_summary_v1",
+  "status": "complete",
+  "source_original_sha256": "acdfdf3f1ceac3819d63b121230bd09e88ecf43154af99eaf8331b748d702a73",
+  "export_kind": "scientific conclusions and numeric summaries; internal evidence inventory excluded",
+  "conclusion": {
+    "authorized_single_primary_training_and_measurement_scope_complete": true,
+    "overall_scientific_review_complete": true,
+    "formal_results_admissible_for_this_declared_system_variant": true,
+    "new_experiments_required_to_close_this_authorized_scope": false,
+    "plain_language_zh": "当前单一路线的C15→C30→C45四口径训练、2000条唯一正式测评与整体科学审查已完成。本适配版本在Seen任务和预训练后目标微调上具有实测效用；目标任务Zero-shot仍低，结果不能被扩展为对原始BPP全部能力、人类提示因果作用、双臂适配无损或论文严格复现的证明。",
+    "manual_human_signoff_claimed": false
+  },
+  "verified_measurements": {
+    "report_status": "complete",
+    "report_issues": [],
+    "training_stages": 7,
+    "displayed_scale_regime_rows": 12,
+    "unique_evaluation_groups": 10,
+    "verified_unique_rollouts": 2000,
+    "rollouts_per_unique_group": 200,
+    "primary_metric": "success_at_end_rate using original success predicates at500control steps before autoreset",
+    "secondary_metric": "success_once_rate; not substituted for the primary SR",
+    "reward_proxy": "mean(last_normalized_reward), retained under the separate name SubSR_released_code_proxy; not certified as the paper thresholded SubSR",
+    "scratch_reuse": "one shared target-only checkpoint and one shared200-rollout group appear in all three scale rows; they are not three independent repetitions",
+    "result_rows": [
+      {
+        "scale": "c15",
+        "seen_pct": 47.5,
+        "zero_shot_pct": 3.0,
+        "shared_scratch_pct": 5.0,
+        "pretrain_finetune_pct": 37.5,
+        "pft_minus_shared_scratch_pp": 32.5
+      },
+      {
+        "scale": "c30",
+        "seen_pct": 55.00000000000001,
+        "zero_shot_pct": 1.5,
+        "shared_scratch_pct": 5.0,
+        "pretrain_finetune_pct": 46.0,
+        "pft_minus_shared_scratch_pp": 41.0
+      },
+      {
+        "scale": "c45",
+        "seen_pct": 66.0,
+        "zero_shot_pct": 4.0,
+        "shared_scratch_pct": 5.0,
+        "pretrain_finetune_pct": 56.00000000000001,
+        "pft_minus_shared_scratch_pp": 51.0
+      }
+    ],
+    "scale_equal_weight_means_pct": {
+      "seen": 56.166666666666664,
+      "zero_shot": 2.8333333333333335,
+      "shared_scratch": 5.0,
+      "pretrain_finetune": 46.5
+    }
+  },
+  "controller_clipping": {
+    "total_clipped_control_steps": 288,
+    "total_control_steps": 1000000,
+    "fraction_of_control_steps": 0.000288,
+    "percent_of_control_steps": 0.0288,
+    "episodes_with_clipping": 17,
+    "only_observed_action_dimension": 6,
+    "dimension_meaning": "zero-based action index6: left-arm seventh joint target",
+    "source": "joint_actions clips physical action16 to the native environment action-space bounds, separately from internalDDIMclip1",
+    "interpretation": "The v2 record is not zero-clipping. Clipping is small in aggregate but oneC15Zero-shot episode has103clipped ticks; no counterfactual quantified its success impact."
+  },
+  "remaining_scientific_and_engineering_limits": [
+    {
+      "id": "single_checkpoint_scope",
+      "detail": "Only the verified released BPP-LIBERO checkpoint is evaluated after this adaptation. The source checkpoint uses single-arm LIBERO sensorimotor/camera/action semantics; the experiment does not represent every BPP checkpoint or its original benchmark capability."
+    },
+    {
+      "id": "modality_and_motor_semantic_change",
+      "detail": "Source twoRGB streams, EEF/gripper proprioception and single-arm OSC action10 are changed to one current ZEDRGB, measured qpos18 and absolute dual-arm action16; demonstrator proprioception/actions are removed from the prompt. Approximately99.9905percent parameter-shape transfer does not certify preservation of modality/token/motor meaning or lossless dual-arm adaptation."
+    },
+    {
+      "id": "human_clip_generalization",
+      "detail": "Each group uses50unique human clips reused across four levels. All50Seen clips are in the correspondingCk training prompt pool; all50Scratch/P+FT clips are in the target training prompt pool. Zero-shot clips are outsideCk training pools by the held-out task mapping. Seen/P+FT are not clip-disjoint or actor-disjoint human demonstration tests."
+    },
+    {
+      "id": "statistical_scope",
+      "detail": "One training seed/initseed1 per lineage and ten reset seeds100000..100009 per fixed task-level. Shared clips/tasks/resets and shared Scratch induce dependence;2000rollouts are not2000independent training replicates. No significance or population-level reliability claim is made."
+    },
+    {
+      "id": "baseline_comparability",
+      "detail": "Official task/split/horizon/controller endpoint and human-video interface align at the declared benchmark level. Initialization, trainable capacity (~347M), anchor-vs-episode sampling, fixed16-frame prompts, preprocessing, action/state normalization, loss masks/objectives and action/replan representation differ from Zero-WAM and other baselines.45k/90k/135k update counts and8x8globalbatch do not establish matched samples, epochs or FLOPs; no strict paper ranking is claimed."
+    },
+    {
+      "id": "remaining_preprocessing",
+      "detail": "Frozen single-view CLIPCLS caching, fixed224resize without original randomcrop/colorjitter and95percent evalcentercrop, source-specific image orientation, and recorded1280x720vs native224square camera projection remain disclosed adaptation differences. Existing source review found no audited arm-order/unit/absolute-delta mismatch, but no new calibration, source-LIBERO positive control or expert replay was performed."
+    },
+    {
+      "id": "finetune_coordinate_switch",
+      "detail": "P+FT installs target-only state quantiles/actionminmax after loadingCkEMA; no affine compensation of projection/output weights is applied. This creates a legitimate learned coordinate change during target3000updates, shared target statistics with Scratch, with no isolated effect measured."
+    },
+    {
+      "id": "source_conformity_does_not_imply_causality",
+      "detail": "Healthy optimization, nonzeroSR and normal process exits establish admissible system measurements, not proof that all remaining adaptations are lossless, human prompts are causally used, or any individual mechanism caused successes/failures."
+    }
+  ],
+  "prompt_causality": "No formalv2 prompt ablation was run. TheseSRs alone do not demonstrate causal use of human prompts.",
+  "c15_regression": "C15Seen56%v1 to47.5%v2 is retained;43old successes became failures and26old failures became successes. Recipe and EMA changes are joint; no isolated cause is established.",
+  "c45_gradient_observation": "v2 max logged preclip norm0.7146769762 versus about2.80e9 in historicalv1; no abnormal-gradient health stop. Joint recipe changed; old trigger and individual contributions remain unestablished.",
+  "monitoring_interruption": "A supervision interruption was recovered without restarting the original training producer. Actual clean process exit was independently observed. Sender and cause of the interruption were not verified. Operational identities and event timeline are retained locally.",
+  "new_experiments_during_review": 0,
+  "new_test_suites_during_review": 0
+}

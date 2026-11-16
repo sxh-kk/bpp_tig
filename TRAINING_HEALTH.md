@@ -95,7 +95,7 @@ Run `arm` before `watch`. It creates `training_health_policy.json` and the indep
 先执行 `arm`，再执行 `watch`。`arm` 在运行根目录创建 `training_health_policy.json` 与独立 `training_health_required.json` 哨兵；哨兵固定 `policy_sha256`、四份既有训练源码 hash 和监控源码 hash。required 哨兵存在时，策略缺失、无效或身份不匹配均拒绝验收，不会静默关闭门槛。启用时若源码 hash 与在跑 C30 的训练 manifest 不符，也会拒绝；不会改写该 manifest。
 
 ```bash
-source /gaozt-test1/sxh/bpp/storage.env
+source $BPP_ROOT/storage.env
 cd "$BPP_ROOT/repos/The-Imitator-Game"
 export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"
 BPP_HEALTH_PYTHON=/usr/bin/python3
@@ -153,6 +153,12 @@ The health policy and watcher are standard-library sidecars, in `bpp/training_he
 
 健康策略与守护程序为只使用标准库的独立模块，位于 `bpp/training_health.py` 与 `bpp/training_health_guard.py`。保留在跑训练器的源码 hash 和实验身份；不改写既有 manifest，不能把后来加入的守护程序写成原数值配方的一部分。策略版本/源码 hash 与部署证据应独立于 trainer/model/data/cache 的来源记录保存。本文标记为已部署前，主代理必须核验实际源码 hash、策略/状态产物、PID 校验、停止行为与验收接入。
 
-The rationale above derives from the existing training implementation and the preserved [C15 v2 / C45 read-only analysis](/gaozt-test1/sxh/bpp/results/review/c15_v2_seen_and_c45_review/analysis_CN.md). This document introduces no new empirical claim about v2 C30/C45 health, root cause or success rate.
+The rationale above derives from the existing training implementation and the preserved [C15 v2 / C45 read-only analysis](metrics/v2_c15/analysis_CN.md). This document introduces no new empirical claim about v2 C30/C45 health, root cause or success rate.
 
-阈值依据来自既有训练实现与已保存的 [C15 v2 / C45 只读分析](/gaozt-test1/sxh/bpp/results/review/c15_v2_seen_and_c45_review/analysis_CN.md)。本文不新增关于 v2 C30/C45 健康情况、根因或成功率的实测结论。
+阈值依据来自既有训练实现与已保存的 [C15 v2 / C45 只读分析](metrics/v2_c15/analysis_CN.md)。本文不新增关于 v2 C30/C45 健康情况、根因或成功率的实测结论。
+
+## Completed run / 本轮已完成
+
+The v2 run finished measurements at 2026-11-16 22:34 Asia/Shanghai. C30/C45 and both target fine-tuning stages passed complete-log admission. The guardian ended with `pipeline_finished`, which is a normal terminal state. A temporary supervisor interruption was recovered without restarting C45; `orphan_exit_observer.py` recorded its actual supervisor reap exit status 0. See `FINAL_REVIEW_CN.md` and the final audit for the preserved evidence. Long-running supervisors should run in an independent session or managed service, with persistent log files.
+
+本轮于北京时间2026-11-16 22:34完成测量，四个受控训练阶段均通过全日志准入。guardian 的 `pipeline_finished` 是正常结束。监督进程曾中断，恢复时没有重启C45；独立退出观察器记录到原训练的真实退出码0。完整证据和解释边界见 `FINAL_REVIEW_CN.md`。长时监督进程应使用独立会话或托管服务，并将日志写入持久目录。

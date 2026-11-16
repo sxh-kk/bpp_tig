@@ -1,0 +1,133 @@
+{
+  "schema": "bpp_v2_final_publication_manifest_v2",
+  "created_utc": "2026-11-16T15:26:51.556567+00:00",
+  "scope": "BPP-LIBERO initialized human-RGB bimanual TIG adaptation; C15/C30/C45 Seen/Zero-shot/Scratch/P+FT",
+  "authoritative_review_sha256": "c655713de50c261a2c0188eacb83be5d6138813f6273676ff58dd405dbd71d5a",
+  "scientific_review_sha256": "acdfdf3f1ceac3819d63b121230bd09e88ecf43154af99eaf8331b748d702a73",
+  "numeric_results_changed": false,
+  "export_policy": "Whitelist scientific metrics, conclusions and aggregate resource costs. Detailed operational and storage-infrastructure records are retained locally and not uploaded. This replaces the rejected detailed resource export with a smaller public summary.",
+  "datasets_or_weights_included": false,
+  "full_raw_case_records_included": false,
+  "public_files": [
+    {
+      "path": "groups.csv",
+      "bytes": 2194,
+      "sha256": "1e9c6a1e894365fdf5b5f8d784fdbec7369b80ac52ff124a980b5fadb91ab7e4"
+    },
+    {
+      "path": "overall_review.json",
+      "bytes": 909,
+      "sha256": "206881557b7547953f1b10e06886f23ce6dcf20165528a772fea463383a86de4"
+    },
+    {
+      "path": "per_level.csv",
+      "bytes": 4056,
+      "sha256": "07fbe4ea4c72e199195bbb4e5db342f4cd678d869188282be70576a7745267b8"
+    },
+    {
+      "path": "per_task_level.csv",
+      "bytes": 24451,
+      "sha256": "94a45d1b2866fded1647d90c775efcf8d2349cbc3f8e90af3c7244159760d04d"
+    },
+    {
+      "path": "plots/bpp_human_rgb_bimanual_all-scales_groups.csv",
+      "bytes": 1729,
+      "sha256": "b04916360335148a6a9628835f97f1286484cd356cc72597761fef168ca3d7c5"
+    },
+    {
+      "path": "plots/bpp_human_rgb_bimanual_all-scales_levels.csv",
+      "bytes": 6436,
+      "sha256": "fe54ca26e394c1a8e5c8d8907d91043528ad00303e16e64da9a985e1211bfd98"
+    },
+    {
+      "path": "plots/bpp_human_rgb_bimanual_all-scales_metadata.json",
+      "bytes": 2149,
+      "sha256": "4d98b520401bb1a02721c23ef353127ccc0dd71e20185665bc4f1125a91c4b5d"
+    },
+    {
+      "path": "plots/bpp_human_rgb_bimanual_all-scales_success_by_level.pdf",
+      "bytes": 40626,
+      "sha256": "70ab39b25f094dd9bb78d49381ff0f8ebfe519a6b63ebae2b6ce1c2eacae18fe"
+    },
+    {
+      "path": "plots/bpp_human_rgb_bimanual_all-scales_success_by_level.png",
+      "bytes": 291478,
+      "sha256": "99695147d53b8dbc38dfc7d4333f886dfc7b8928b7bc6992dad6ff93c6163053"
+    },
+    {
+      "path": "plots/bpp_human_rgb_bimanual_all-scales_success_by_level.svg",
+      "bytes": 110977,
+      "sha256": "82473fbe8da2a1cfd6852962bde7af7196a7304dec0a91606e33527695ddfeff"
+    },
+    {
+      "path": "plots/bpp_human_rgb_bimanual_all-scales_terminal_success.pdf",
+      "bytes": 27054,
+      "sha256": "1429e543426e20b2583ffc72e953ec02ea03e15c7e704ed6d275f6d88470e79b"
+    },
+    {
+      "path": "plots/bpp_human_rgb_bimanual_all-scales_terminal_success.png",
+      "bytes": 186748,
+      "sha256": "55385eddab7a3c3bb293f8bbfc002d5e5e17705a7cf21819bf942d5efd6b6a08"
+    },
+    {
+      "path": "plots/bpp_human_rgb_bimanual_all-scales_terminal_success.svg",
+      "bytes": 79749,
+      "sha256": "5173cc7e66013f7199aa3fa58428d5a731f1e6105892e74bb20ad440118cbb60"
+    },
+    {
+      "path": "resource_accounting/RESOURCE_NOTES.md",
+      "bytes": 2234,
+      "sha256": "82646e3b23bed5c64442a5e7720516c254cff10533c72617066881be80cffdae"
+    },
+    {
+      "path": "resource_accounting/formal_resource_accounting.json",
+      "bytes": 2228,
+      "sha256": "fe0f3e427ac87da3dec91227f173b035e395d91b87758807c89e7bccc6e544d9"
+    },
+    {
+      "path": "resource_accounting/formal_resource_accounting_gpus.csv",
+      "bytes": 70,
+      "sha256": "14d564dbab920f5e4430e937bc3e14ec847ed0234ccf56a651ce58ba79bf4c12"
+    },
+    {
+      "path": "resource_accounting/formal_resource_accounting_stages.csv",
+      "bytes": 2718,
+      "sha256": "6f456fd61b6ad414dc5bce6b1d97b938231284d2c333d86095069ddda03661c2"
+    },
+    {
+      "path": "resource_accounting/formal_resource_accounting_storage.csv",
+      "bytes": 283,
+      "sha256": "c967e4d24656971946a12e02da417609823a74f74709d1a8e61b89a95db906fe"
+    },
+    {
+      "path": "resource_accounting/formal_resource_accounting_totals.csv",
+      "bytes": 219,
+      "sha256": "48fa3725c8672b930b47e0a865d3f4d94bdf38ca81f734fff2472fab1345cef5"
+    },
+    {
+      "path": "resource_accounting/resource_supplement.json",
+      "bytes": 719,
+      "sha256": "2e158dcf8640f02400efc01b98c5e130d1cbd45d3f69bec61655dffa29492f4a"
+    },
+    {
+      "path": "review.json",
+      "bytes": 8307,
+      "sha256": "6eff2dd93613df113a06dd85a9e6443fcf8c552231b7a63631667ca5a65ae03e"
+    },
+    {
+      "path": "scientific_review.json",
+      "bytes": 7592,
+      "sha256": "910ca6c3d088ecab63516ca76fe98e221fc938a1bd22e5ecafc9d63cb1857d4f"
+    },
+    {
+      "path": "training.csv",
+      "bytes": 2685,
+      "sha256": "9a60d6f7e9157da227c891fc77b497ab956ea7923cacb8dfa9e21bd27551d033"
+    },
+    {
+      "path": "resource_accounting/artifact_manifest.json",
+      "bytes": 4286,
+      "sha256": "c64eacf404ba692de84f2bf99facd6868710865d01c03876881c6cf2c1de102a"
+    }
+  ]
+}

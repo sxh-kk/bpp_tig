@@ -1,0 +1,13 @@
+scale,regime,label,task_set,planned_episodes,observed_episodes,success_count,success_at_end_rate,success_at_end_percent,checkpoint_sha256,shared_scratch_baseline
+c15,seen,Seen*,seen_5tasks,200,200,95,0.475,47.5,0511f67aeccb5720d03f4fa37aea7f4c24dd0a15d641344c6edc781b2542c9a3,False
+c15,zero_shot,Zero-shot,heldout_5tasks,200,200,6,0.03,3.0,0511f67aeccb5720d03f4fa37aea7f4c24dd0a15d641344c6edc781b2542c9a3,False
+c15,scratch,Scratch (shared),heldout_5tasks,200,200,10,0.05,5.0,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True
+c15,pretrain_finetune,P+FT,heldout_5tasks,200,200,75,0.375,37.5,2a8ef121fc0949184ff00a45dbcb3710f9df5dcb5209de935fdbfbe39ce6dfbe,False
+c30,seen,Seen*,seen_5tasks,200,200,110,0.55,55.0,be7d1a6693b45ecc728471f92be6aea398ea58adc0bdc246fbc751731285375c,False
+c30,zero_shot,Zero-shot,heldout_5tasks,200,200,3,0.015,1.5,be7d1a6693b45ecc728471f92be6aea398ea58adc0bdc246fbc751731285375c,False
+c30,scratch,Scratch (shared),heldout_5tasks,200,200,10,0.05,5.0,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True
+c30,pretrain_finetune,P+FT,heldout_5tasks,200,200,92,0.46,46.0,d12bc4140e3c2a03cf48bd6fd9acab3405f31b852962d062e3b9fed3fd3ece8f,False
+c45,seen,Seen*,seen_5tasks,200,200,132,0.66,66.0,b4de8629f756669c4cc0c3cd102245ca99281bea5bc075cd2eac2cd2fc445a9a,False
+c45,zero_shot,Zero-shot,heldout_5tasks,200,200,8,0.04,4.0,b4de8629f756669c4cc0c3cd102245ca99281bea5bc075cd2eac2cd2fc445a9a,False
+c45,scratch,Scratch (shared),heldout_5tasks,200,200,10,0.05,5.0,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True
+c45,pretrain_finetune,P+FT,heldout_5tasks,200,200,112,0.56,56.0,d63792f0c1dac9fbcd8d7d002bab946936ae303d152bd91e9f95c0c4fca98542,False

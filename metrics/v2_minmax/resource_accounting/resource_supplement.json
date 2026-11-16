@@ -1,0 +1,10 @@
+{
+  "schema": "bpp_tig_v2_public_resource_supplement_v1",
+  "original_supplement_sha256": "b31de48a5d3808f1c2563ab5b6c0584734f47aaf1c06babbef004e2f0ce97db6",
+  "resource_summary": "formal_resource_accounting.json",
+  "accounting_selector_correction": "Exact .data/.features key-suffix selection removes8pseudo manifest-path diagnostics caused by artifact SHA metadata keys. Original previews and full diagnostics retained locally.",
+  "corrected_report_issues": [],
+  "new_model_or_simulator_work": false,
+  "new_test_suites": 0,
+  "public_export_policy": "Aggregate usage, stage costs and scientific statistics only. Operational source inventory, storage mount details, device IDs and event intervals are excluded."
+}

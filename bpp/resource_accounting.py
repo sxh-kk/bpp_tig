@@ -311,7 +311,7 @@ def storage(state, project_root=ROOT):
             candidates.add(os.path.abspath(value))
     queue = [(v, artifact_expected(state, k), "artifact:"+k)
              for k,v in state.get("artifacts",{}).items()
-             if ".data" in k or ".features" in k or ".feature_shard_" in k]
+             if k.endswith(".data") or k.endswith(".features")]
     config = state.get("config",{})
     if config.get("external_checkpoint"): candidates.add(config["external_checkpoint"])
     for group in stage_groups(state):

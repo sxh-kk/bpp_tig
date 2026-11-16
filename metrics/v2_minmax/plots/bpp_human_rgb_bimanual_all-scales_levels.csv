@@ -1,0 +1,49 @@
+scale,regime,label,task_set,checkpoint_sha256,shared_scratch_baseline,level,planned_episodes,observed_episodes,success_count,success_at_end_rate,success_at_end_percent
+c15,seen,Seen*,seen_5tasks,0511f67aeccb5720d03f4fa37aea7f4c24dd0a15d641344c6edc781b2542c9a3,False,L0,50,50,24,0.48,48.0
+c15,seen,Seen*,seen_5tasks,0511f67aeccb5720d03f4fa37aea7f4c24dd0a15d641344c6edc781b2542c9a3,False,L1,50,50,31,0.62,62.0
+c15,seen,Seen*,seen_5tasks,0511f67aeccb5720d03f4fa37aea7f4c24dd0a15d641344c6edc781b2542c9a3,False,L2,50,50,21,0.42,42.0
+c15,seen,Seen*,seen_5tasks,0511f67aeccb5720d03f4fa37aea7f4c24dd0a15d641344c6edc781b2542c9a3,False,L3,50,50,19,0.38,38.0
+c15,zero_shot,Zero-shot,heldout_5tasks,0511f67aeccb5720d03f4fa37aea7f4c24dd0a15d641344c6edc781b2542c9a3,False,L0,50,50,2,0.04,4.0
+c15,zero_shot,Zero-shot,heldout_5tasks,0511f67aeccb5720d03f4fa37aea7f4c24dd0a15d641344c6edc781b2542c9a3,False,L1,50,50,0,0.0,0.0
+c15,zero_shot,Zero-shot,heldout_5tasks,0511f67aeccb5720d03f4fa37aea7f4c24dd0a15d641344c6edc781b2542c9a3,False,L2,50,50,2,0.04,4.0
+c15,zero_shot,Zero-shot,heldout_5tasks,0511f67aeccb5720d03f4fa37aea7f4c24dd0a15d641344c6edc781b2542c9a3,False,L3,50,50,2,0.04,4.0
+c15,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L0,50,50,2,0.04,4.0
+c15,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L1,50,50,4,0.08,8.0
+c15,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L2,50,50,3,0.06,6.0
+c15,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L3,50,50,1,0.02,2.0
+c15,pretrain_finetune,P+FT,heldout_5tasks,2a8ef121fc0949184ff00a45dbcb3710f9df5dcb5209de935fdbfbe39ce6dfbe,False,L0,50,50,21,0.42,42.0
+c15,pretrain_finetune,P+FT,heldout_5tasks,2a8ef121fc0949184ff00a45dbcb3710f9df5dcb5209de935fdbfbe39ce6dfbe,False,L1,50,50,22,0.44,44.0
+c15,pretrain_finetune,P+FT,heldout_5tasks,2a8ef121fc0949184ff00a45dbcb3710f9df5dcb5209de935fdbfbe39ce6dfbe,False,L2,50,50,15,0.3,30.0
+c15,pretrain_finetune,P+FT,heldout_5tasks,2a8ef121fc0949184ff00a45dbcb3710f9df5dcb5209de935fdbfbe39ce6dfbe,False,L3,50,50,17,0.34,34.0
+c30,seen,Seen*,seen_5tasks,be7d1a6693b45ecc728471f92be6aea398ea58adc0bdc246fbc751731285375c,False,L0,50,50,36,0.72,72.0
+c30,seen,Seen*,seen_5tasks,be7d1a6693b45ecc728471f92be6aea398ea58adc0bdc246fbc751731285375c,False,L1,50,50,38,0.76,76.0
+c30,seen,Seen*,seen_5tasks,be7d1a6693b45ecc728471f92be6aea398ea58adc0bdc246fbc751731285375c,False,L2,50,50,23,0.46,46.0
+c30,seen,Seen*,seen_5tasks,be7d1a6693b45ecc728471f92be6aea398ea58adc0bdc246fbc751731285375c,False,L3,50,50,13,0.26,26.0
+c30,zero_shot,Zero-shot,heldout_5tasks,be7d1a6693b45ecc728471f92be6aea398ea58adc0bdc246fbc751731285375c,False,L0,50,50,2,0.04,4.0
+c30,zero_shot,Zero-shot,heldout_5tasks,be7d1a6693b45ecc728471f92be6aea398ea58adc0bdc246fbc751731285375c,False,L1,50,50,0,0.0,0.0
+c30,zero_shot,Zero-shot,heldout_5tasks,be7d1a6693b45ecc728471f92be6aea398ea58adc0bdc246fbc751731285375c,False,L2,50,50,0,0.0,0.0
+c30,zero_shot,Zero-shot,heldout_5tasks,be7d1a6693b45ecc728471f92be6aea398ea58adc0bdc246fbc751731285375c,False,L3,50,50,1,0.02,2.0
+c30,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L0,50,50,2,0.04,4.0
+c30,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L1,50,50,4,0.08,8.0
+c30,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L2,50,50,3,0.06,6.0
+c30,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L3,50,50,1,0.02,2.0
+c30,pretrain_finetune,P+FT,heldout_5tasks,d12bc4140e3c2a03cf48bd6fd9acab3405f31b852962d062e3b9fed3fd3ece8f,False,L0,50,50,24,0.48,48.0
+c30,pretrain_finetune,P+FT,heldout_5tasks,d12bc4140e3c2a03cf48bd6fd9acab3405f31b852962d062e3b9fed3fd3ece8f,False,L1,50,50,30,0.6,60.0
+c30,pretrain_finetune,P+FT,heldout_5tasks,d12bc4140e3c2a03cf48bd6fd9acab3405f31b852962d062e3b9fed3fd3ece8f,False,L2,50,50,20,0.4,40.0
+c30,pretrain_finetune,P+FT,heldout_5tasks,d12bc4140e3c2a03cf48bd6fd9acab3405f31b852962d062e3b9fed3fd3ece8f,False,L3,50,50,18,0.36,36.0
+c45,seen,Seen*,seen_5tasks,b4de8629f756669c4cc0c3cd102245ca99281bea5bc075cd2eac2cd2fc445a9a,False,L0,50,50,36,0.72,72.0
+c45,seen,Seen*,seen_5tasks,b4de8629f756669c4cc0c3cd102245ca99281bea5bc075cd2eac2cd2fc445a9a,False,L1,50,50,36,0.72,72.0
+c45,seen,Seen*,seen_5tasks,b4de8629f756669c4cc0c3cd102245ca99281bea5bc075cd2eac2cd2fc445a9a,False,L2,50,50,35,0.7,70.0
+c45,seen,Seen*,seen_5tasks,b4de8629f756669c4cc0c3cd102245ca99281bea5bc075cd2eac2cd2fc445a9a,False,L3,50,50,25,0.5,50.0
+c45,zero_shot,Zero-shot,heldout_5tasks,b4de8629f756669c4cc0c3cd102245ca99281bea5bc075cd2eac2cd2fc445a9a,False,L0,50,50,3,0.06,6.0
+c45,zero_shot,Zero-shot,heldout_5tasks,b4de8629f756669c4cc0c3cd102245ca99281bea5bc075cd2eac2cd2fc445a9a,False,L1,50,50,1,0.02,2.0
+c45,zero_shot,Zero-shot,heldout_5tasks,b4de8629f756669c4cc0c3cd102245ca99281bea5bc075cd2eac2cd2fc445a9a,False,L2,50,50,0,0.0,0.0
+c45,zero_shot,Zero-shot,heldout_5tasks,b4de8629f756669c4cc0c3cd102245ca99281bea5bc075cd2eac2cd2fc445a9a,False,L3,50,50,4,0.08,8.0
+c45,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L0,50,50,2,0.04,4.0
+c45,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L1,50,50,4,0.08,8.0
+c45,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L2,50,50,3,0.06,6.0
+c45,scratch,Scratch (shared),heldout_5tasks,8e00fca51283e984ae0b13137b61de4b423e3a33c2405b98a2d5433cac1eebbf,True,L3,50,50,1,0.02,2.0
+c45,pretrain_finetune,P+FT,heldout_5tasks,d63792f0c1dac9fbcd8d7d002bab946936ae303d152bd91e9f95c0c4fca98542,False,L0,50,50,29,0.58,58.0
+c45,pretrain_finetune,P+FT,heldout_5tasks,d63792f0c1dac9fbcd8d7d002bab946936ae303d152bd91e9f95c0c4fca98542,False,L1,50,50,29,0.58,58.0
+c45,pretrain_finetune,P+FT,heldout_5tasks,d63792f0c1dac9fbcd8d7d002bab946936ae303d152bd91e9f95c0c4fca98542,False,L2,50,50,28,0.56,56.0
+c45,pretrain_finetune,P+FT,heldout_5tasks,d63792f0c1dac9fbcd8d7d002bab946936ae303d152bd91e9f95c0c4fca98542,False,L3,50,50,26,0.52,52.0
