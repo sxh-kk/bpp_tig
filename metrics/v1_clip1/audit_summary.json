@@ -1,0 +1,88 @@
+{
+  "schema": "bpp_tig_public_audit_summary_v1",
+  "created_utc": "2026-11-16T04:42:56.640391+00:00",
+  "summary_only": true,
+  "full_audits_included": false,
+  "no_new_tests_inference_training_or_experiments": true,
+  "source_audits": {
+    "bpp_official_protocol_alignment_audit.json": {
+      "sha256": "24ede7a2f5ca68fd041c305154f6dff65fd92b35445b350afbcdac4a1df12466",
+      "schema": "bpp_tig_official_protocol_alignment_audit_v1",
+      "scope": "full audit retained on original run machine; not included in this public summary"
+    },
+    "bpp_adaptation_validity_audit.json": {
+      "sha256": "8b83b3897670d67d43c36d5f4af2cc0824fa37253db92129b3e2299d693bbd7e",
+      "schema": "bpp_adaptation_validity_readonly_audit_v1",
+      "scope": "full audit retained on original run machine; not included in this public summary"
+    },
+    "bpp_capability_claims_audit.json": {
+      "sha256": "b5040ca2cadf1ca434b33e0bf7ce3178e68595bf8ba72c6efe42e2d41e2d2245",
+      "schema": "bpp_tig_capability_claims_audit_v1",
+      "scope": "full audit retained on original run machine; not included in this public summary"
+    },
+    "bpp_c45_failure_analysis_v1.json": {
+      "sha256": "c9c1823f33453fa958175320fd377cb0eaa47a1a6ab98f84ecb05960e87c1565",
+      "schema": "bpp_c45_failure_forensics_v1",
+      "scope": "full audit retained on original run machine; not included in this public summary"
+    }
+  },
+  "protocol_alignment": {
+    "scope": "Released-code and archived-v1 protocol review",
+    "conclusion": "Shared TIG task/supervision/control interface as a declared BPP humanRGB adaptation; not a compute-matched reproduction or a numerical reproduction of paper baseline tables."
+  },
+  "adaptation_validity": {
+    "scope": "Read-only v1 source and existing numerical artifacts",
+    "confirmed_issue": "Unclipped quantile-normalized action targets versus DDIMclip1 output support. Controller clip_count0 does not exclude internal sampler clipping.",
+    "recipe_omissions": "V1 native training omitted source input perturbation and EMA updates. Released original HF state_dicts.model already held EMA; source weight-key selection was correct.",
+    "causality_limit": "These issues motivate the accepted v2 recipe, but their success-rate contribution is unmeasured."
+  },
+  "capability_scope": {
+    "scales": [
+      "c15",
+      "c30"
+    ],
+    "unique_formal_cases": 1400,
+    "PFT_minus_Scratch_paired_wins_losses": {
+      "c15": [
+        77,
+        1
+      ],
+      "c30": [
+        97,
+        0
+      ]
+    },
+    "positive_net_task_contributions_each_scale": 5,
+    "prompt_controls": "Existing C15 Seen/L0 diagnostic20rollouts and40offline predictions support prompt-dependent first actions on10fixed states.",
+    "limit": "Single trainseed; small Seen diagnostic with training-pool human clips. No isolated human-domain/embodiment effect, complete temporal imitation or unseen-human generalization established."
+  },
+  "c45_failure_analysis": {
+    "scope": "Archived v1 static logs/numeric labels/checkpoint metadata; no new rollouts",
+    "logged_records": 676,
+    "records_preclip_grad_gt1": 548,
+    "preclip_grad_median": 302.97,
+    "preclip_grad_p90_approx": 33706,
+    "preclip_grad_max": 2799509760.0,
+    "C15_C30_recorded_grad_norms_all_below1": true,
+    "late_training_loss_ratio_C45_over_C30_approx": 13,
+    "late_FT_loss_ratio_C45_over_C30_FT_approx": 7.8,
+    "MugRack_expert_joint_target_coverage_each_box": {
+      "c15": 1.0,
+      "c30": 1.0,
+      "c45": 1.0
+    },
+    "MugRack_Seen_successes_out_of40": {
+      "c15": 20,
+      "c30": 21,
+      "c45": 0
+    },
+    "numeric_episodes_reviewed": 9000,
+    "numeric_frames_reviewed": 3039478,
+    "nonfinite_labels_found": false,
+    "column_or_unit_error_found": false,
+    "source_EMA_loading_LR_optimizer_steps_and_four_normalizer_buffers_consistent": true,
+    "not_located": "Trigger layer/sample and causal contributions remain unidentified.",
+    "AdamW_caveat": "Gradient clipping coefficient is not a same-factor parameter-update reduction and is not evidence of frozen parameters.",
+    "v2_status": "Minmax+inputperturb0.1+EMA repairs are not yet a demonstrated solution. Module gradient and clipping-coefficient telemetry is part of main training, not an extra ablation."
+  }
+}
